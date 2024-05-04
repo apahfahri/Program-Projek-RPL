@@ -19,6 +19,15 @@
 CREATE DATABASE IF NOT EXISTS `smurfer` /*!40100 DEFAULT CHARACTER SET armscii8 COLLATE armscii8_bin */;
 USE `smurfer`;
 
+-- Dumping structure for table smurfer.game
+CREATE TABLE IF NOT EXISTS `game` (
+  `Id_Game` int(11) NOT NULL AUTO_INCREMENT,
+  `Nama_Game` varchar(50) NOT NULL,
+  PRIMARY KEY (`Id_Game`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
+
+-- Data exporting was unselected.
+
 -- Dumping structure for table smurfer.users
 CREATE TABLE IF NOT EXISTS `users` (
   `Id_User` int(11) NOT NULL AUTO_INCREMENT,

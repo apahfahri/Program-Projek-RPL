@@ -1,5 +1,6 @@
 <?php
 include('Server/game.php');
+include('layout/header.php')
 ?>
 
 <!DOCTYPE html>
