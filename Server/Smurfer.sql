@@ -19,6 +19,19 @@
 CREATE DATABASE IF NOT EXISTS `smurfer` /*!40100 DEFAULT CHARACTER SET armscii8 COLLATE armscii8_bin */;
 USE `smurfer`;
 
+-- Dumping structure for table smurfer.admin
+CREATE TABLE IF NOT EXISTS `admin` (
+  `Id_Admin` int(11) NOT NULL AUTO_INCREMENT,
+  `Username` varchar(50) DEFAULT NULL,
+  `Password` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`Id_Admin`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
+
+-- Dumping data for table smurfer.admin: ~1 rows (approximately)
+DELETE FROM `admin`;
+INSERT INTO `admin` (`Id_Admin`, `Username`, `Password`) VALUES
+	(1, 'admin', 'admin');
+
 -- Dumping structure for table smurfer.game
 CREATE TABLE IF NOT EXISTS `game` (
   `Id_Game` int(11) NOT NULL AUTO_INCREMENT,
@@ -26,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `game` (
   PRIMARY KEY (`Id_Game`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
 
--- Dumping data for table smurfer.game: ~6 rows (approximately)
+-- Dumping data for table smurfer.game: ~5 rows (approximately)
 DELETE FROM `game`;
 INSERT INTO `game` (`Id_Game`, `Nama_Game`) VALUES
 	(1, 'Mobile Legends'),
