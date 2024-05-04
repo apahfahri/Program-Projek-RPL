@@ -16,15 +16,13 @@ include('layout/header.php')
 
 <body>
 
-    <!-- Navbar -->
-
     <!-- Game Section -->
     <div class="container-lg">
         <div class="row">
             <?php while ($row = $game->fetch_assoc()) { ?>
                     <div class="col-sm-4 mb-4">
                         <div class="card">
-                            <a href="<?php echo "workerSelect.php?game=" . $row['Nama_Game']; ?>" style="text-decoration: none; text-align: center; color: black;">
+                            <a href="<?php echo "workerSelect.php?game=" . $row['Id_Game']; ?>" style="text-decoration: none; text-align: center; color: black;">
                                 <img class="card-img-top" src="asset/game/<?php echo $row['Nama_Game'] ?>.jpeg" alt="Card image cap">
                                 <h5 class="card-title"><?php echo $row['Nama_Game'] ?></h5>
                             </a>

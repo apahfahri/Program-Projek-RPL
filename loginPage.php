@@ -36,7 +36,11 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             $_SESSION['foto'] = $foto;
             $_SESSION['logged_in'] = true;
 
-            header('location: index.php?message=Logged in succesfully');
+            if ($status == 'Customer'){
+                header('location: index.php?message=Logged in succesfully');
+            } else {
+                header('location: workerPage.php?message=Logged in succesfully');
+            }
         } else {
             header('location: loginPage.php?error=Cound not verify your account');
         }
