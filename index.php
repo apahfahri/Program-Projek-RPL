@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include('Server/game.php');
 include('layout/header.php')
 ?>
@@ -15,7 +17,7 @@ include('layout/header.php')
 </head>
 
 <body>
-
+    
     <!-- Game Section -->
     <div class="container-lg">
         <div class="row">
