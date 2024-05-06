@@ -36,7 +36,7 @@
                 <ul class="dropdown-menu dropdown-menu-end bg-dark text-small shadow">
                   <li><a class="dropdown-item text-light" href="#">New project...</a></li>
                   <li><a class="dropdown-item text-light" href="#">Settings</a></li>
-                  <li><a class="dropdown-item text-light" href="#">Profile</a></li>
+                  <li><a class="dropdown-item text-light" href="../profilePage.php">Profile</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>
