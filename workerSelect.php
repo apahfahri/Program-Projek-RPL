@@ -33,12 +33,16 @@ if (isset($_GET['game'])) {
             <?php while ($row = $workers->fetch_assoc()) { ?>
                 <div class="col-sm-4 mb-4">
                     <div class="card">
+                        <img src="image/<?php echo $row['Foto'] ?>.jpeg" class="card-img-top" alt="gambar">
+                        <div class="card-body">
                             <h5 class="card-title"><?php echo $row['Username'] ?></h5>
+                            <p class="card-text">Rating : <?php echo $row['Rating'] ?></p>
+                            <a href="#" class="btn btn-primary">Order</a>
+                        </div>
                     </div>
                 </div>
             <?php } ?>
         </div>
-    </div>
 
 </body>
 
