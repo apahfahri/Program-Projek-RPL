@@ -12,6 +12,11 @@ if (isset($_GET['game'])) {
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $workers = $stmt->get_result();
+} else {
+    $query = "SELECT * FROM workers_game wg inner join workers w on w.Id_Worker = wg.Id_Worker inner join users u on u.Id_User = w.Id_User";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $workers = $stmt->get_result();
 }
 ?>
 
@@ -24,6 +29,7 @@ if (isset($_GET['game'])) {
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/5f166431bc.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -36,8 +42,10 @@ if (isset($_GET['game'])) {
                         <img src="image/<?php echo $row['Foto'] ?>.jpeg" class="card-img-top" alt="gambar">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $row['Username'] ?></h5>
-                            <p class="card-text">Rating : <?php echo $row['Rating'] ?></p>
-                            <a href="#" class="btn btn-primary">Order</a>
+                            <p class="card-text"> <span style="color: yellow;"><i class="fa-regular fa-star"></i></span> 
+                                <?php echo $row['Rating'] ?></p>
+                            <a href="#" class="btn btn-primary"><i class="fa-solid fa-file-contract"></i></i> Order</a>
+                            <a href="#" class="btn btn-warning"> <i class="fa-regular fa-address-card"></i> Profile</a>
                         </div>
                     </div>
                 </div>

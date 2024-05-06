@@ -18,10 +18,10 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav mt-1">
         <li class="nav-item">
-          <a class="nav-link" href="#">Game</a>
+          <a class="nav-link" href="index.php">Game</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Worker</a>
+          <a class="nav-link" href="workerSelect.php">Worker</a>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
@@ -34,9 +34,9 @@
                   <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end bg-dark text-small shadow">
-                  <li><a class="dropdown-item text-light" href="#">New project...</a></li>
+                  <li><a class="dropdown-item text-light" href="#">My Order</a></li>
                   <li><a class="dropdown-item text-light" href="#">Settings</a></li>
-                  <li><a class="dropdown-item text-light" href="../profilePage.php">Profile</a></li>
+                  <li><a class="dropdown-item text-light" href="./profilePage.php">Profile</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>
