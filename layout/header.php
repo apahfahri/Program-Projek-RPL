@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +12,7 @@
 <body>
 
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark mb-3">
-    <a class="navbar-brand ml-4" href="#">Smurfer</a>
+    <a class="navbar-brand ml-4" href="../index.php">Smurfer</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -31,12 +32,12 @@
             <div class="d-flex align-items-center">
               <div class="flex-shrink-0 dropdown">
                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                  <img src="../image/<?php echo $_SESSION['foto'] ?>.jpeg" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end bg-dark text-small shadow">
                   <li><a class="dropdown-item text-light" href="#">My Order</a></li>
                   <li><a class="dropdown-item text-light" href="#">Settings</a></li>
-                  <li><a class="dropdown-item text-light" href="./profilePage.php">Profile</a></li>
+                  <li><a class="dropdown-item text-light" href="profilePage.php">Profile</a></li>
                   <li>
                     <hr class="dropdown-divider">
                   </li>
@@ -52,18 +53,6 @@
       </ul>
     </div>
   </nav>
-
-  <div class="container-fluid pb-3">
-    <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
-      <div class="bg-body-tertiary border rounded-3">
-        <br><br><br><br><br><br><br><br><br><br>
-      </div>
-      <div class="bg-body-tertiary border rounded-3">
-        <br><br><br><br><br><br><br><br><br><br>
-      </div>
-    </div>
-  </div>
-
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

@@ -14,10 +14,10 @@ include('layout/header.php')
 <body>
     <div class="container">
         <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="foto_pengguna.jpg" alt="Foto Pengguna">
+            <img class="card-img-top" src="image/<?php echo $_SESSION['foto'] ?>.jpeg" alt="Foto Pengguna">
             <div class="card-body">
-                <h5 class="card-title">Nama: Budi</h5>
-                <p class="card-text">Email: budi@example.com</p>
+                <h5 class="card-title">Nama: <?php echo $_SESSION['username'] ?></h5>
+                <p class="card-text">Email: <?php echo $_SESSION['email'] ?></p>
                 <a href="#" class="btn btn-primary">Lihat Profil</a>
             </div>
         </div>

@@ -17,19 +17,30 @@ include('layout/header.php')
 </head>
 
 <body>
-    
+
+    <div class="container-fluid pb-3">
+        <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
+            <div class="bg-body-tertiary border rounded-3">
+                <br><br><br><br><br><br><br><br><br><br>
+            </div>
+            <div class="bg-body-tertiary border rounded-3">
+                <br><br><br><br><br><br><br><br><br><br>
+            </div>
+        </div>
+    </div>
+
     <!-- Game Section -->
     <div class="container-lg">
         <div class="row">
             <?php while ($row = $game->fetch_assoc()) { ?>
-                    <div class="col-sm-4 mb-4">
-                        <div class="card">
-                            <a href="<?php echo "workerSelect.php?game=" . $row['Id_Game']; ?>" style="text-decoration: none; text-align: center; color: black;">
-                                <img class="card-img-top" src="asset/game/<?php echo $row['Nama_Game'] ?>.jpeg" alt="Card image cap">
-                                <h5 class="card-title"><?php echo $row['Nama_Game'] ?></h5>
-                            </a>
-                        </div>
+                <div class="col-sm-4 mb-4">
+                    <div class="card">
+                        <a href="<?php echo "workerSelect.php?game=" . $row['Id_Game']; ?>" style="text-decoration: none; text-align: center; color: black;">
+                            <img class="card-img-top" src="asset/game/<?php echo $row['Nama_Game'] ?>.jpeg" alt="Card image cap">
+                            <h5 class="card-title"><?php echo $row['Nama_Game'] ?></h5>
+                        </a>
                     </div>
+                </div>
             <?php } ?>
         </div>
     </div>
