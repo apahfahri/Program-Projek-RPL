@@ -1,4 +1,5 @@
 *{
+    font-family: helvetica;
     margin: 0;
     padding: 0;
 }
@@ -9,14 +10,19 @@ section{
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    background: green;
+    background: url('../asset/backgroun-login.jpeg');
+    background-position: center;
+    background-size: cover;
 }
 
 .box{
     position: relative;
     width: 400px;
     height: 450px;
-    background: red;
+    background: transparent;
+    border: 2px solid white;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,14 +53,14 @@ h2{
 }
 
 .input input:focus ~ label,
-.input input:focus ~ :valid{
+.input input:not(:placeholder-shown) ~ label{
     top: -1px;
 }
 
 .input input{
     width: 200px;
     height: 50px;
-    margin-left: 5px;
+    margin-left: -30px;
     background: transparent;
     border: none;
     outline: none;
@@ -70,6 +76,36 @@ h2{
     font-size: 1.2em;
     top: 20px;
 }
+
+button {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    background: white;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.register{
+    font-size: .9em;
+    color: white;
+    text-align: center;
+    margin: 10px 0 10px;
+}
+
+.register a{
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+}
+
+.register p a:hover {
+    text-decoration: underline;
+}
+
 
 
 

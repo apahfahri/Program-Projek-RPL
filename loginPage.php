@@ -59,41 +59,24 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 </head>
 
 <body>
-    <!-- <div class="container mt-4">
-        <div class="container-fluid">
-            <form autocomplete="off" id="login-form" method="POST" action="loginPage.php">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username/Email</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Insert Username or Email">
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Insert Password">
-                    <a href="registerPage.php">Don't Have an Account? Sign Up</a>
-                </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-            </form>
-        </div>
-    </div> -->
-
     <section>
         <div class="box">
             <div class="form-value">
                 <form autocomplete="off" id="login-form" method="POST" action="loginPage.php">
                     <h2>Login</h2>
                     <div class="input">
-                        <input type="text" class="form-control" id="username" name="username">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="" required>
                         <i class="fa-solid fa-envelope"></i>
-                        <label for="username" class="form-label">Username/Email</label>
+                        <label for="username" class="form-label">Username or Email</label>
                     </div>
                     <div class="input">
-                        <input type="password" class="form-control" id="password" name="password">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="" required>
                         <i class="fa-solid fa-lock"></i>
                         <label for="password" class="form-label">Password</label>
                     </div>
                     <button type="submit" class="btn btn-primary">Login</button>
                     <div class="register">
-                        <a href="registerPage.php">Don't Have an Account? Sign Up</a>
+                        <p>Don't Have an Account? <a href="registerPage.php">Sign Up</a></p>
                     </div>
                 </form>
             </div>
