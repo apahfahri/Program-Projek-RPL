@@ -13,7 +13,7 @@ if (isset($_GET['game'])) {
     $stmt->execute();
     $workers = $stmt->get_result();
 } else {
-    $query = "SELECT * FROM workers_game wg inner join workers w on w.Id_Worker = wg.Id_Worker inner join users u on u.Id_User = w.Id_User";
+    $query = "SELECT * FROM workers w inner join users u on u.Id_User = w.Id_User";
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $workers = $stmt->get_result();
@@ -39,7 +39,7 @@ if (isset($_GET['game'])) {
             <?php while ($row = $workers->fetch_assoc()) { ?>
                 <div class="col-sm-4 mb-4">
                     <div class="card">
-                        <img src="image/<?php echo $row['Foto']?>.jpeg" class="card-img-top" alt="gambar">
+                        <img src="image/<?php echo $row['Foto']?>" class="card-img-top" alt="gambar">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo $row['Username'] ?></h5>
                             <p class="card-text"> <span style="color: yellow;"><i class="fa-regular fa-star"></i></span> 

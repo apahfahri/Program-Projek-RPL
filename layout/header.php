@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,17 +11,16 @@
 <body>
 
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark mb-3">
-    <a class="navbar-brand ml-4" href="../index.php">Smurfer</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <a class="navbar-brand" href="#">
+      <img src="./asset/smurfer/logo.png" alt="Logo" width="200" class="d-inline-block align-text-top ml-4">
+    </a>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav mt-1">
         <li class="nav-item">
-          <a class="nav-link" href="index.php">Game</a>
+          <a class="nav-link" href="index.php" style="font-size: x-large;">Game</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="workerSelect.php">Worker</a>
+          <a class="nav-link" href="workerSelect.php" style="font-size: x-large;">Worker</a>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
@@ -30,11 +28,24 @@
           <?php
           if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
             <div class="d-flex align-items-center">
-              <div class="flex-shrink-0 dropdown">
+              <div class="flex-shrink-0 dropdown-lg">
                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="../image/<?php echo $_SESSION['foto'] ?>.jpeg" alt="mdo" width="32" height="32" class="rounded-circle">
+                  <img src="../image/<?php echo $_SESSION['foto'] ?>" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end bg-dark text-small shadow">
+                  <li class="row align-items-center ml-auto">
+                    <div class="col-2">
+                      <img src="../image/<?php echo $_SESSION['foto'] ?>" alt="mdo" width="42" height="42" class="rounded-circle">
+                    </div>
+                    <div class="col-auto">
+                      <h5 class="text-light ml-3 mb-0"><?php echo $_SESSION['username'] ?></h5>
+                      <p class="text-light ml-3 mb-0 mr-1"><?php echo $_SESSION['email'] ?></p>
+                      <p class="text-light ml-3 mb-0"><?php echo $_SESSION['status'] ?></p>
+                    </div>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
                   <li><a class="dropdown-item text-light" href="#">My Order</a></li>
                   <li><a class="dropdown-item text-light" href="#">Settings</a></li>
                   <li><a class="dropdown-item text-light" href="profilePage.php">Profile</a></li>
@@ -51,12 +62,14 @@
           ?>
         </li>
       </ul>
+
     </div>
   </nav>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 </body>
 
