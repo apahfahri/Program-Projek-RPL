@@ -32,7 +32,7 @@
                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                   <img src="../image/<?php echo $_SESSION['foto'] ?>" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end bg-dark text-small shadow">
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark text-small shadow">
                   <li class="row align-items-center ml-auto">
                     <div class="col-2">
                       <img src="../image/<?php echo $_SESSION['foto'] ?>" alt="mdo" width="42" height="42" class="rounded-circle">
