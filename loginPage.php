@@ -49,14 +49,17 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styleLogin.css">
+    <script src="https://kit.fontawesome.com/5f166431bc.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <div class="container mt-4">
+    <!-- <div class="container mt-4">
         <div class="container-fluid">
             <form autocomplete="off" id="login-form" method="POST" action="loginPage.php">
                 <div class="mb-3">
@@ -71,6 +74,31 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
         </div>
-    </div>
+    </div> -->
+
+    <section>
+        <div class="box">
+            <div class="form-value">
+                <form autocomplete="off" id="login-form" method="POST" action="loginPage.php">
+                    <h2>Login</h2>
+                    <div class="input">
+                        <input type="text" class="form-control" id="username" name="username">
+                        <i class="fa-solid fa-envelope"></i>
+                        <label for="username" class="form-label">Username/Email</label>
+                    </div>
+                    <div class="input">
+                        <input type="password" class="form-control" id="password" name="password">
+                        <i class="fa-solid fa-lock"></i>
+                        <label for="password" class="form-label">Password</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <div class="register">
+                        <a href="registerPage.php">Don't Have an Account? Sign Up</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
 </body>
+
 </html>
