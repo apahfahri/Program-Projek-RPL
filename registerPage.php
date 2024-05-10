@@ -32,7 +32,6 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
 <body>
     <section>
         <div class="box">
-            <img src="./asset/smurfer/logo_2.png" alt="">
             <form autocomplete="off" id="register-form" method="POST" action="registerPage.php">
                 <h2>Register</h2>
                 <div class="input">
@@ -52,7 +51,7 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
                 </div>
                 <button type="submit" class="btn btn-primary">Register</button>
                 <div class="register">
-                    <p>Already Have Account? <a href="registerPage.php">Sign In</a></p>
+                    <p>Already Have Account? <a href="loginPage.php">Sign In</a></p>
                 </div>
             </form>
         </div>
