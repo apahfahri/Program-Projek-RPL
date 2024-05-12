@@ -8,8 +8,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
-<body>
-
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark mb-3">
     <a class="navbar-brand" href="#">
       <img src="./asset/smurfer/logo.png" alt="Logo" width="200" class="d-inline-block align-text-top ml-4">
@@ -30,12 +28,12 @@
             <div class="d-flex align-items-center">
               <div class="flex-shrink-0 dropdown-lg">
                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="../image/<?php echo $_SESSION['foto'] ?>" alt="mdo" width="32" height="32" class="rounded-circle">
+                  <img src="./image/<?php echo $_SESSION['foto'] ?>" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark text-small shadow">
                   <li class="row align-items-center ml-auto">
                     <div class="col-2">
-                      <img src="../image/<?php echo $_SESSION['foto'] ?>" alt="mdo" width="42" height="42" class="rounded-circle">
+                      <img src="./image/<?php echo $_SESSION['foto'] ?>" alt="mdo" width="42" height="42" class="rounded-circle">
                     </div>
                     <div class="col-auto">
                       <h5 class="text-light ml-3 mb-0"><?php echo $_SESSION['username'] ?></h5>
@@ -74,3 +72,4 @@
 </body>
 
 </html>
+

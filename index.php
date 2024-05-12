@@ -19,10 +19,6 @@ include('layout/header.php')
 <body>
 
     <div class="container-fluid pb-3">
-        <div class="d-grid gap-3" style="grid-template-columns: 1fr 2fr;">
-            <div class="bg-body-tertiary border rounded-3">
-                <br><br><br><br><br><br><br><br><br><br>
-            </div>
             <div class="bg-body-tertiary border rounded-3">
                 <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
