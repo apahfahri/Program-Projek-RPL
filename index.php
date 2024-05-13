@@ -50,10 +50,10 @@ include('layout/header.php')
         <div class="row">
             <?php while ($row = $game->fetch_assoc()) { ?>
                 <div class="col-sm-4 mb-4">
-                    <div class="card">
+                    <div class="card text-bg-dark shadow scale">
                         <a href="<?php echo "workerSelect.php?game=" . $row['Id_Game']; ?>" style="text-decoration: none; text-align: center; color: black;">
                             <img class="card-img-top" src="asset/game/<?php echo $row['Nama_Game'] ?>.jpeg" alt="Card image cap">
-                            <h5 class="card-title"><?php echo $row['Nama_Game'] ?></h5>
+                            <p class="card-title text-light"><?php echo $row['Nama_Game'] ?></p>
                         </a>
                     </div>
                 </div>

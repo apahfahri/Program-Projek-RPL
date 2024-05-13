@@ -2,27 +2,7 @@
 session_start();
 include('layout/header.php');
 include('server/connection.php');
-
-if (isset($_GET['game'])) {
-    $id = $_GET['game'];
-    $query = "SELECT * FROM workers_game wg inner join workers w on w.Id_Worker = wg.Id_Worker inner join users u on u.Id_User = w.Id_User WHERE wg.Id_Game = $id";
-    $stmt = $conn->prepare($query);
-    $stmt->execute();
-    $workers = $stmt->get_result();
-    
-    $query_game = "SELECT Nama_Game FROM game WHERE Id_Game = $id";
-    $stmt_game = $conn->prepare($query_game);
-    $stmt_game->execute();
-    $game_result = $stmt_game->get_result();
-    $game_data = $game_result->fetch_assoc();
-    $game = $game_data['Nama_Game'];
-} else {
-    $game = "All Game";
-    $query = "SELECT * FROM workers w inner join users u on u.Id_User = w.Id_User";
-    $stmt = $conn->prepare($query);
-    $stmt->execute();
-    $workers = $stmt->get_result();
-}
+include('Server/worker.php');
 ?>
 
 <!DOCTYPE html>
@@ -45,10 +25,9 @@ if (isset($_GET['game'])) {
         <div class="row">
             <?php while ($row = $workers->fetch_assoc()) { ?>
                 <div class="col-sm-4 mb-4">
-                    <div class="card">
-                        <!-- Menambahkan style CSS untuk mengatur lebar maksimum gambar -->
+                    <div class="card text-bg-dark shadow scale">
                         <img src="image/<?php echo $row['Foto']?>" class="card-img-top" alt="gambar">
-                        <div class="card-body">
+                        <div class="card-body ">
                             <h5 class="card-title"><?php echo $row['Username'] ?></h5>
                             <p class="card-text"> <span style="color: yellow;"><i class="fa-regular fa-star"></i></span> 
                                 <?php echo $row['Rating'] ?></p>
