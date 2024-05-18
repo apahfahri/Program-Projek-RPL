@@ -8,7 +8,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark nav-underline mb-3">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark nav-underline shadow mb-3">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
       <img src="./asset/smurfer/logo.png" alt="Logo" width="200" class="d-inline-block align-text-top ml-4">
