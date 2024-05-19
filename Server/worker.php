@@ -15,5 +15,7 @@ if (isset($_GET['game'])) {
     $game_result = $stmt_game->get_result();
     $game_data = $game_result->fetch_assoc();
     $game = $game_data['Nama_Game'];
+} else {
+    header('location: index.php?error=Select Game First');
 }
 ?>
