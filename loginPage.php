@@ -56,10 +56,20 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     <title>Login Page</title>
     <link rel="stylesheet" href="css/styleLogin.css">
     <script src="https://kit.fontawesome.com/5f166431bc.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <section>
+        <?php if (isset($_GET["error"])) { ?>
+            <script>
+                Swal.fire({
+                    title: "Failed!",
+                    text: "Could Not Verify Your Account!",
+                    icon: "error"
+                });
+            </script>
+        <?php } ?>
         <div class="box">
             <div class="form-value">
                 <form autocomplete="off" id="login-form" method="POST" action="loginPage.php">

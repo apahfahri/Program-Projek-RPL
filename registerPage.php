@@ -58,7 +58,7 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
                     <label for="username" class="form-label">Username</label>
                 </div>
                 <div class="input">
-                    <input type="text" class="form-control" id="email" name="email" placeholder="" required>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="" required>
                     <i class="fa-solid fa-envelope"></i>
                     <label for="email" class="form-label">Email</label>
                 </div>

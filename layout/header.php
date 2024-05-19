@@ -11,15 +11,12 @@
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark nav-underline mb-3">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-      <img src="./asset/smurfer/logo.png" alt="Logo" width="200" class="d-inline-block align-text-top ml-4">
+      <img src="./asset/smurfer/logo.png" alt="Logo" width="125" class="d-inline-block align-text-top ml-4">
     </a>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav mt-1">
         <li class="nav-item">
-          <a class="nav-link" href="index.php" style="font-size: x-large;">Game</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="workerSelect.php" style="font-size: x-large;">Worker</a>
+          <a class="nav-link" href="index.php" style="font-size: large;">Game</a>
         </li>
       </ul>
       <ul class="navbar-nav justify-content-end">
