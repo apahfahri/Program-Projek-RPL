@@ -64,7 +64,7 @@ include('Server/price.php');
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="orderForm" action="order.php" method="POST">
+                    <form id="orderForm" action="orderAction.php" method="POST">
                         <input type="hidden" name="id_worker" id="Id_Worker">
                         <input type="hidden" name="id_game" id="Id_Game">
                         <input type="hidden" name="id_user" id="Id_User">

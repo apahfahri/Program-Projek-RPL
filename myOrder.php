@@ -1,3 +1,10 @@
+<?php
+session_start();
+include('layout/header.php');
+include('server/connection.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
