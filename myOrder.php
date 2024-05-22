@@ -3,7 +3,7 @@ session_start();
 include('layout/header.php');
 include('server/connection.php');
 
-$query = "SELECT o.Id_Order, u.Username, g.Nama_Game, r1.rank as Initial_Rank, r2.rank as Final_Rank, o.Total_Price, o.Status
+$query = "SELECT o.Id_Order, u.Username, g.Nama_Game, g.Image, r1.rank as Initial_Rank, r2.rank as Final_Rank, o.Total_Price, o.Status
           FROM `order` o
           INNER JOIN workers w ON o.Id_Worker = w.Id_Worker
           INNER JOIN users u ON w.Id_User = u.Id_User
@@ -42,47 +42,52 @@ $result = $stmt->get_result();
     <?php } ?>
 
     <div class="container mt-5">
-        <h2>Your Orders</h2>
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Worker</th>
-                        <th>Game</th>
-                        <th>Initial Rank</th>
-                        <th>Final Rank</th>
-                        <th>Total Price</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row = $result->fetch_assoc()) { ?>
-                        <tr>
-                            <td><?php echo $row['Id_Order']; ?></td>
-                            <td><?php echo $row['Username']; ?></td>
-                            <td><?php echo $row['Nama_Game']; ?></td>
-                            <td><?php echo $row['Initial_Rank']; ?></td>
-                            <td><?php echo $row['Final_Rank']; ?></td>
-                            <td><?php echo $row['Total_Price']; ?></td>
-                            <td><?php echo $row['Status']; ?></td>
-                            <td>
-                                <?php if ($row['Status'] == 'pending') { ?>
-                                    <form action="cancel_order.php" method="POST">
-                                        <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
-                                        <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
-                                    </form>
-                                <?php } else { ?>
-                                    <button class="btn btn-secondary btn-sm" disabled>Cancel</button>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+        <h5>My Orders</h5>
+
+        <div class="row">
+            <?php while ($row = $result->fetch_assoc()) { ?>
+                <div class="col-12 mb-3">
+                    <div class="card h-100 card text-bg-dark position-relative">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="./asset/game/<?php echo $row['Image']; ?>" class="img-fluid rounded-start" alt="Game Image" style="height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <p class="card-text">Worker: <?php echo $row['Username']; ?></p>
+                                    <p class="card-text">Rank: <?php echo $row['Initial_Rank']; ?> -> <?php echo $row['Final_Rank']; ?></p>
+                                    <p class="card-text">Status: <?php echo $row['Status']; ?></p>
+                                    <div class="position-absolute bottom-0 end-0 p-3">
+                                        <p class="card-text">Total Price: Rp.<?php echo $row['Total_Price']; ?></p>
+                                    </div>
+                                    <div class="position-absolute bottom-0 p-3">
+                                        <?php if ($row['Status'] == 'Pending') { ?>
+                                            <form action="cancelOrder.php" method="POST" style="display:inline;">
+                                                <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
+                                                <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
+                                            </form>
+                                        <?php } else if ($row['Status'] == 'Accepted') { ?>
+                                            <form action="payment.php" method="POST" style="display:inline;">
+                                                <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
+                                                <button type="submit" class="btn btn-primary btn-sm">Make Payment</button>
+                                            </form>
+                                            <form action="cancelOrder.php" method="POST" style="display:inline;">
+                                                <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
+                                                <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
+                                            </form>
+                                        <?php } else { ?>
+                                            <button class="btn btn-secondary btn-sm" disabled>Delete</button>
+                                        <?php } ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
     </div>
+
 </body>
 
 </html>

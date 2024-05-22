@@ -11,7 +11,11 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     $email = $_POST['username'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM users WHERE (username = ? OR email = ?) AND password = ? LIMIT 1";
+    $query = "SELECT u.Id_User, u.username, u.email, u.password, u.status, u.foto, w.Id_Worker 
+              FROM users u 
+              LEFT JOIN workers w ON w.Id_User = u.Id_User 
+              WHERE (u.username = ? OR u.email = ?) AND u.password = ? 
+              LIMIT 1";
 
     $stmt_login = $conn->prepare($query);
     $stmt_login->bind_param('sss', $email, $email, $password);
@@ -20,20 +24,24 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         $stmt_login->store_result();
 
         if ($stmt_login->num_rows() == 1) {
-            $stmt_login->bind_result($id, $username, $email, $password, $status, $foto);
+            $stmt_login->bind_result($id_user, $username, $email, $password, $status, $foto, $id_worker);
             $stmt_login->fetch();
 
-            $_SESSION['id_user'] = $id;
+            $_SESSION['id_user'] = $id_user;
             $_SESSION['username'] = $username;
             $_SESSION['email'] = $email;
             $_SESSION['status'] = $status;
             $_SESSION['foto'] = $foto;
             $_SESSION['logged_in'] = true;
 
+            if ($id_worker !== null) {
+                $_SESSION['id_worker'] = $id_worker;
+            }
+
             if ($status == 'Customer') {
-                header('location: index.php?message=Logged in succesfully');
+                header('location: index.php?message=Logged in successfully');
             } else {
-                header('location: workerPage.php?message=Logged in succesfully');
+                header('location: workerPage.php?message=Logged in successfully');
             }
             exit;
         } else {
@@ -45,6 +53,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         exit;
     }
 }
+
 ?>
 
 <!DOCTYPE html>

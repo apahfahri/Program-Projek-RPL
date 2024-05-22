@@ -12,7 +12,7 @@ $query = "SELECT o.Id_Order, u.Username, g.Nama_Game, r1.rank as Initial_Rank, r
           INNER JOIN rank r2 ON o.final_rank = r2.Point AND g.Id_Game = r2.Id_Game
           WHERE o.Id_Worker = ?";
 $stmt = $conn->prepare($query);
-$stmt->bind_param('i', $_SESSION['id_user']);
+$stmt->bind_param('i', $_SESSION['id_worker']);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
