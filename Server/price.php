@@ -1,7 +1,6 @@
 <?php
 include('server/connection.php');
-
-$sql = "SELECT Point, Price FROM rank";
+$sql = "SELECT Point, Price FROM rank where Id_Game = $id";
 $result = $conn->query($sql);
 
 $perubahanRank = array();

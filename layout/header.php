@@ -46,7 +46,7 @@
                   <li>
                     <hr class="dropdown-divider">
                   </li>
-                  <li><a class="dropdown-item text-light" href="/Smurfer/myOrder.php">My Order</a></li>
+                  <li><a class="dropdown-item text-light" href="../myOrder.php">My Order</a></li>
                   <li><a class="dropdown-item text-light" href="#">Settings</a></li>
                   <li><a class="dropdown-item text-light" href="profilePage.php">Profile</a></li>
                   <li>
