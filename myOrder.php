@@ -47,37 +47,37 @@ $result = $stmt->get_result();
         <div class="row">
             <?php while ($row = $result->fetch_assoc()) { ?>
                 <div class="col-12 mb-3">
-                    <div class="card h-100 card text-bg-dark position-relative">
+                    <div class="card h-100 card text-bg-dark">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <img src="./asset/game/<?php echo $row['Image']; ?>" class="img-fluid rounded-start" alt="Game Image" style="height: 100%; object-fit: cover;">
                             </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
+                            <div class="col-md-8 d-flex flex-column">
+                                <div class="card-body d-flex flex-column">
                                     <p class="card-text">Worker: <?php echo $row['Username']; ?></p>
                                     <p class="card-text">Rank: <?php echo $row['Initial_Rank']; ?> -> <?php echo $row['Final_Rank']; ?></p>
                                     <p class="card-text">Status: <?php echo $row['Status']; ?></p>
-                                    <div class="position-absolute bottom-0 end-0 p-3">
-                                        <p class="card-text">Total Price: Rp.<?php echo $row['Total_Price']; ?></p>
-                                    </div>
-                                    <div class="position-absolute bottom-0 p-3">
-                                        <?php if ($row['Status'] == 'Pending') { ?>
-                                            <form action="cancelOrder.php" method="POST" style="display:inline;">
-                                                <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
-                                                <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
-                                            </form>
-                                        <?php } else if ($row['Status'] == 'Accepted') { ?>
-                                            <form action="payment.php" method="POST" style="display:inline;">
-                                                <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
-                                                <button type="submit" class="btn btn-primary btn-sm">Make Payment</button>
-                                            </form>
-                                            <form action="cancelOrder.php" method="POST" style="display:inline;">
-                                                <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
-                                                <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
-                                            </form>
-                                        <?php } else { ?>
-                                            <button class="btn btn-secondary btn-sm" disabled>Delete</button>
-                                        <?php } ?>
+                                    <div class="mt-auto d-flex justify-content-between align-items-center w-100">
+                                        <div>
+                                            <?php if ($row['Status'] == 'Pending') { ?>
+                                                <form action="cancelOrder.php" method="POST" style="display:inline;">
+                                                    <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
+                                                    <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
+                                                </form>
+                                            <?php } else if ($row['Status'] == 'Accepted') { ?>
+                                                <form action="payment.php" method="POST" style="display:inline;">
+                                                    <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
+                                                    <button type="submit" class="btn btn-primary btn-sm">Make Payment</button>
+                                                </form>
+                                                <form action="cancelOrder.php" method="POST" style="display:inline;">
+                                                    <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
+                                                    <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
+                                                </form>
+                                            <?php } else { ?>
+                                                <button class="btn btn-secondary btn-sm" disabled>Delete</button>
+                                            <?php } ?>
+                                        </div>
+                                        <p class="card-text mb-0">Total Price: Rp.<?php echo $row['Total_Price']; ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@ $result = $stmt->get_result();
             <?php } ?>
         </div>
     </div>
-
 </body>
+
 
 </html>

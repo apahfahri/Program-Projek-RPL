@@ -3,16 +3,23 @@ session_start();
 include('layout/header.php');
 include('server/connection.php');
 
-$query = "SELECT o.Id_Order, u.Username, g.Nama_Game, r1.rank as Initial_Rank, r2.rank as Final_Rank, o.Total_Price, o.Status
+$query = "SELECT o.Id_Order, 
+                 c_u.Username as Customer_Username, 
+                 g.Nama_Game, 
+                 g.Image, 
+                 r1.rank as Initial_Rank, 
+                 r2.rank as Final_Rank, 
+                 o.Total_Price, 
+                 o.Status
           FROM `order` o
           INNER JOIN workers w ON o.Id_Worker = w.Id_Worker
-          INNER JOIN users u ON w.Id_User = u.Id_User
+          INNER JOIN users c_u ON o.Id_User = c_u.Id_User
           INNER JOIN game g ON o.Id_Game = g.Id_Game
           INNER JOIN rank r1 ON o.initial_rank = r1.Point AND g.Id_Game = r1.Id_Game
           INNER JOIN rank r2 ON o.final_rank = r2.Point AND g.Id_Game = r2.Id_Game
           WHERE o.Id_Worker = ?";
 $stmt = $conn->prepare($query);
-$stmt->bind_param('i', $_SESSION['id_worker']);
+$stmt->bind_param('i', $_SESSION['id_user']);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
@@ -32,49 +39,44 @@ $result = $stmt->get_result();
 
 <body>
     <div class="container mt-5">
-        <h5>Your Jobs</h5>
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Worker</th>
-                        <th>Game</th>
-                        <th>Initial Rank</th>
-                        <th>Final Rank</th>
-                        <th>Total Price</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row = $result->fetch_assoc()) { ?>
-                        <tr>
-                            <td><?php echo $row['Id_Order']; ?></td>
-                            <td><?php echo $row['Username']; ?></td>
-                            <td><?php echo $row['Nama_Game']; ?></td>
-                            <td><?php echo $row['Initial_Rank']; ?></td>
-                            <td><?php echo $row['Final_Rank']; ?></td>
-                            <td><?php echo $row['Total_Price']; ?></td>
-                            <td><?php echo $row['Status']; ?></td>
-                            <td>
-                                <?php if ($row['Status'] == 'Pending') { ?>
-                                    <form action="acceptOrder.php" method="POST">
-                                        <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
-                                        <button type="submit" class="btn btn-primary btn-sm">Accept</button>
-                                    </form>
-                                    <form action="declineOrder.php" method="POST">
-                                        <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
-                                        <button type="submit" class="btn btn-danger btn-sm">Decline</button>
-                                    </form>
-                                <?php } else { ?>
-                                    <button class="btn btn-secondary btn-sm" disabled>Cancel</button>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+        <h5>My Orders</h5>
+
+        <div class="row">
+            <?php while ($row = $result->fetch_assoc()) { ?>
+                <div class="col-12 mb-3">
+                    <div class="card h-100 card text-bg-dark">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="./asset/game/<?php echo $row['Image']; ?>" class="img-fluid rounded-start" alt="Game Image" style="height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="col-md-8 d-flex flex-column">
+                                <div class="card-body d-flex flex-column">
+                                    <p class="card-text">Customer: <?php echo $row['Customer_Username']; ?></p>
+                                    <p class="card-text">Rank: <?php echo $row['Initial_Rank']; ?> -> <?php echo $row['Final_Rank']; ?></p>
+                                    <p class="card-text">Status: <?php echo $row['Status']; ?></p>
+                                    <div class="mt-auto d-flex justify-content-between align-items-center w-100">
+                                        <div>
+                                            <?php if ($row['Status'] == 'Pending') { ?>
+                                                <form action="acceptOrder.php" method="POST">
+                                                    <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
+                                                    <button type="submit" class="btn btn-primary btn-sm">Accept</button>
+                                                </form>
+                                                <form action="declineOrder.php" method="POST">
+                                                    <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
+                                                    <button type="submit" class="btn btn-danger btn-sm">Decline</button>
+                                                </form>
+                                            <?php } else { ?>
+                                                <button class="btn btn-secondary btn-sm" disabled>Cancel</button>
+                                            <?php } ?>
+                                        </div>
+                                        <p class="card-text mb-0">Total Price: Rp.<?php echo $row['Total_Price']; ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
     </div>
 </body>
