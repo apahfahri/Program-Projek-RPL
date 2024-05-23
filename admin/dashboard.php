@@ -80,7 +80,7 @@ $users = $stmt_users->get_result();
 
                         <li class="sidebar-item ">
                             <a href="tableCustomer.php" class='sidebar-link'>
-                                <i class="bi bi-basket3-fill"></i>
+                                <i class="bi bi-people-fill"></i>
                                 <span>Customers</span>
                             </a>
                         </li>
@@ -89,6 +89,13 @@ $users = $stmt_users->get_result();
                             <a href="tableWorker.php" class='sidebar-link'>
                                 <i class="bi bi-controller"></i>
                                 <span>Workers</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item ">
+                            <a href="tableOrder.php" class='sidebar-link'>
+                                <i class="bi bi-basket3-fill"></i>
+                                <span>Orders</span>
                             </a>
                         </li>
 
@@ -101,7 +108,7 @@ $users = $stmt_users->get_result();
                 <a href="#" class="burger-btn d-block d-xl-none">
                     <i class="bi bi-justify fs-3"></i>
                 </a>
-            </header>   
+            </header>
 
             <div class="page-heading">
                 <h3>Statistics</h3>
