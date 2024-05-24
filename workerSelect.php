@@ -77,10 +77,11 @@ include('Server/price.php');
                             <input type="text" class="form-control" id="Game" value='<?php echo $game ?>' disabled>
                         </div>
 
-                        <div class="row">
+                        <!-- Select Rank Game Tier -->
+                        <div class="row rank-tier">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Initial Rank:</label>
+                                    <label for="initialRank" class="col-form-label">Initial Rank:</label>
                                     <select class="form-select" aria-label="Default select example" name="initial" id="initialRank">
                                         <option selected value="">Select Rank</option>
                                         <?php foreach ($initialRanks as $row) { ?>
@@ -91,7 +92,7 @@ include('Server/price.php');
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Final Rank:</label>
+                                    <label for="finalRank" class="col-form-label">Final Rank:</label>
                                     <select class="form-select" aria-label="Default select example" name="final" id="finalRank">
                                         <option selected value="">Select Rank</option>
                                         <?php foreach ($finalRanks as $row) { ?>
@@ -102,8 +103,27 @@ include('Server/price.php');
                             </div>
                         </div>
 
+                        <!-- Select Rank Game Rating -->
+                        <div class="row rank-rating">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="initialRating" class="col-form-label">Initial Rating:</label>
+                                    <input type="range" class="form-range" min="0" max="20000" step="1000" id="initialRange">
+                                    <span id="initialRangeValue">0</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="finalRating" class="col-form-label">Final Rating:</label>
+                                    <input type="range" class="form-range" min="0" max="20000" step="1000" id="finalRange">
+                                    <span id="finalRangeValue">0</span>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="mb-3">
-                            <label for="message-text" class="col-form-label">Price:</label>
+                            <label for="priceInput" class="col-form-label">Price:</label>
                             <input type="text" class="form-control" id="priceInput" name="price" disabled>
                         </div>
 
@@ -142,6 +162,13 @@ include('Server/price.php');
         $('#Id_Worker').val(idWorker);
         $('#Id_Game').val(idGame);
         $('#Id_User').val(idUser);
+        if (idGame == 3 || idGame == 4) {
+            $('.rank-tier').hide();
+            $('.rank-rating').show();
+        } else {
+            $('.rank-tier').show();
+            $('.rank-rating').hide();
+        }
         $('#orderModal').modal('show');
     });
 
@@ -202,4 +229,24 @@ include('Server/price.php');
 
         document.getElementById('priceInput').value = totalPrice;
     }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const initialRange = document.getElementById('initialRange');
+        const initialRangeValue = document.getElementById('initialRangeValue');
+        const finalRange = document.getElementById('finalRange');
+        const finalRangeValue = document.getElementById('finalRangeValue');
+
+        // Set initial values
+        initialRangeValue.textContent = initialRange.value;
+        finalRangeValue.textContent = finalRange.value;
+
+        // Update values on input change
+        initialRange.addEventListener('input', function() {
+            initialRangeValue.textContent = this.value;
+        });
+
+        finalRange.addEventListener('input', function() {
+            finalRangeValue.textContent = this.value;
+        });
+    });
 </script>
