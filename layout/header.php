@@ -11,7 +11,7 @@
 <body>
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark nav-underline shadow mb-3">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="/landingPage.php">
         <img src="./asset/smurfer/logo.png" alt="Logo" width="125" class="d-inline-block align-text-top ml-4">
       </a>
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
