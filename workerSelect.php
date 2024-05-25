@@ -120,8 +120,6 @@ include('Server/price.php');
                                 </div>
                             </div>
                         </div>
-
-
                         <div class="mb-3">
                             <label for="priceInput" class="col-form-label">Price:</label>
                             <input type="text" class="form-control" id="priceInput" name="price" disabled>

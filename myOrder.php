@@ -65,7 +65,7 @@ $result = $stmt->get_result();
                                                     <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
                                                 </form>
                                             <?php } else if ($row['Status'] == 'Accepted') { ?>
-                                                <form action="payment.php" method="POST" style="display:inline;">
+                                                <form action="paymentPage.php" method="POST" style="display:inline;">
                                                     <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
                                                     <button type="submit" class="btn btn-primary btn-sm">Make Payment</button>
                                                 </form>
@@ -77,7 +77,7 @@ $result = $stmt->get_result();
                                                 <button class="btn btn-secondary btn-sm" disabled>Delete</button>
                                             <?php } ?>
                                         </div>
-                                        <p class="card-text mb-0">Total Price: Rp.<?php echo $row['Total_Price']; ?></p>
+                                        <p class="card-text mb-0">Total Price: Rp.<?php echo $row ? number_format($row['Total_Price'], 0) : ''; ?></p>
                                     </div>
                                 </div>
                             </div>
