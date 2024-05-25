@@ -36,7 +36,7 @@ $users = $stmt_users->get_result();
                 <div class="sidebar-header position-relative">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo">
-                            <a href="index.html"><img src="../dist/assets/compiled/svg/logo.svg" alt="Logo" srcset=""></a>
+                            <a href="dashboard.php">Smurfer</a>
                         </div>
                         <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
@@ -164,7 +164,11 @@ $users = $stmt_users->get_result();
                                                         <td class="text-bold-500"><?php echo $row['Password'] ?></td>
                                                         <td><?php echo $row['Status'] ?></td>
                                                         <td><img src="../image/<?php echo $row['Foto'] ?>" alt="" width="32" height="32" class="rounded-circle"></td>
-                                                        <td><a href="#"><i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="mail"></i></a></td>
+                                                        <td>
+                                                            <a href="#">
+                                                                <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="mail"></i>
+                                                            </a>
+                                                        </td>
                                                     </tr>
 
                                                 </tbody>

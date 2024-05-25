@@ -3,7 +3,7 @@ session_start();
 include('../server/connection.php');
 
 if (isset($_SESSION['logged_in'])) {
-    header('location: adminPage.php');
+    header('location: Dashboard.php');
     exit;
 }
 
@@ -31,7 +31,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             $_SESSION['username'] = $username;
             $_SESSION['logged_in'] = true;
                 
-            header('location: adminPage.php?message=Logged in succesfully');
+            header('location: dashboard.php?message=Logged in succesfully');
         } else {
             header('location: loginAdmin.php?error=Cound not verify your account');
         }

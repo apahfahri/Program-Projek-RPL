@@ -2,7 +2,8 @@
 session_start();
 include('../server/connection.php');
 
-$query_users = "SELECT * FROM users u inner join workers w on u.Id_User = w.Id_User
+$query_users = "SELECT * FROM users u 
+inner join workers w on u.Id_User = w.Id_User
 inner join game g on w.Id_Game = g.Id_Game
 where Status = 'Worker'";
 
@@ -38,7 +39,7 @@ $users = $stmt_users->get_result();
                 <div class="sidebar-header position-relative">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo">
-                            <a href="index.html"><img src="../dist/assets/compiled/svg/logo.svg" alt="Logo" srcset=""></a>
+                            <a href="dashboard.php">Smurfer</a>
                         </div>
                         <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
@@ -133,7 +134,7 @@ $users = $stmt_users->get_result();
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Customers Table</h4>
+                                    <h4 class="card-title">Worker Table</h4>
                                 </div>
                                 <div class="card-content">
                                     <!-- <div class="card-body">
