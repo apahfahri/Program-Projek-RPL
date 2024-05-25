@@ -2,7 +2,9 @@
 session_start();
 include('../server/connection.php');
 
-$query_users = "SELECT * FROM users where Status = 'Worker'";
+$query_users = "SELECT * FROM users u inner join workers w on u.Id_User = w.Id_User
+inner join game g on w.Id_Game = g.Id_Game
+where Status = 'Worker'";
 
 $stmt_users = $conn->prepare($query_users);
 
@@ -151,6 +153,7 @@ $users = $stmt_users->get_result();
                                                     <th>USERNAME</th>
                                                     <th>EMAIL</th>
                                                     <th>PASSWORD</th>
+                                                    <th>GAME</th>
                                                     <th>STATUS</th>
                                                     <th>PHOTO</th>
                                                     <th>ACTION</th>
@@ -162,8 +165,9 @@ $users = $stmt_users->get_result();
                                                         <td class="text-bold-500"><?php echo $row['Username'] ?></td>
                                                         <td><?php echo $row['Email'] ?></td>
                                                         <td class="text-bold-500"><?php echo $row['Password'] ?></td>
+                                                        <td><?php echo $row['Nama_Game'] ?></td>
                                                         <td><?php echo $row['Status'] ?></td>
-                                                        <td><?php echo $row['Foto'] ?></td>
+                                                        <td><img src="../image/<?php echo $row['Foto'] ?>" alt="" width="32" height="32" class="rounded-circle"></td>
                                                         <td><a href="#"><i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="mail"></i></a></td>
                                                     </tr>
 

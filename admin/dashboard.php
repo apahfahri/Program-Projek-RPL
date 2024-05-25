@@ -2,13 +2,22 @@
 session_start();
 include('../server/connection.php');
 
-$query_users = "SELECT count(*) FROM users where Status = 'Customer'";
+$query = 
+    "SELECT 'Customer' AS Status, COUNT(*) AS count FROM users WHERE Status = 'Customer'
+    UNION ALL
+    SELECT 'Worker', COUNT(*) FROM users WHERE Status = 'Worker'
+    UNION ALL
+    SELECT 'Order', COUNT(*) FROM `Order`";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$stmt->bind_result($status, $count);
 
-$stmt_users = $conn->prepare($query_users);
-
-$stmt_users->execute();
-
-$users = $stmt_users->get_result();
+// Mengambil hasil
+$counts = [];
+while ($stmt->fetch()) {
+    $counts[$status] = $count;
+}
+$stmt->close();
 
 ?>
 
@@ -123,12 +132,12 @@ $users = $stmt_users->get_result();
                                         <div class="row">
                                             <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
                                                 <div class="stats-icon purple mb-2">
-                                                    <i class="iconly-boldShow"></i>
+                                                    <i class="bi-fluid bi-people-fill"></i>
                                                 </div>
                                             </div>
                                             <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                                 <h6 class="text-muted font-semibold">Total Customers</h6>
-                                                <h6 class="font-extrabold mb-0"><?php echo 'sedikit' ?></h6>
+                                                <h6 class="font-extrabold mb-0"><?php echo $counts['Customer'] ?></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -140,12 +149,12 @@ $users = $stmt_users->get_result();
                                         <div class="row">
                                             <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
                                                 <div class="stats-icon blue mb-2">
-                                                    <i class="iconly-boldProfile"></i>
+                                                    <i class="bi-fluid bi-controller"></i>
                                                 </div>
                                             </div>
                                             <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                                 <h6 class="text-muted font-semibold">Total Workers</h6>
-                                                <h6 class="font-extrabold mb-0">183.000</h6>
+                                                <h6 class="font-extrabold mb-0"><?php echo $counts['Worker'] ?></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -157,12 +166,12 @@ $users = $stmt_users->get_result();
                                         <div class="row">
                                             <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
                                                 <div class="stats-icon green mb-2">
-                                                    <i class="iconly-boldAdd-User"></i>
+                                                    <i class="bi-fluid bi-basket3-fill"></i>
                                                 </div>
                                             </div>
                                             <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                                                 <h6 class="text-muted font-semibold">Total Orders</h6>
-                                                <h6 class="font-extrabold mb-0">80.000</h6>
+                                                <h6 class="font-extrabold mb-0"><?php echo $counts['Order'] ?></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -174,7 +183,7 @@ $users = $stmt_users->get_result();
                                         <div class="row">
                                             <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
                                                 <div class="stats-icon red mb-2">
-                                                    <i class="iconly-boldBookmark"></i>
+                                                    <i class="bi-fluid bi-graph-up-arrow"></i>
                                                 </div>
                                             </div>
                                             <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">

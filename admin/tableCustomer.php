@@ -163,7 +163,7 @@ $users = $stmt_users->get_result();
                                                         <td><?php echo $row['Email'] ?></td>
                                                         <td class="text-bold-500"><?php echo $row['Password'] ?></td>
                                                         <td><?php echo $row['Status'] ?></td>
-                                                        <td><?php echo $row['Foto'] ?></td>
+                                                        <td><img src="../image/<?php echo $row['Foto'] ?>" alt="" width="32" height="32" class="rounded-circle"></td>
                                                         <td><a href="#"><i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="mail"></i></a></td>
                                                     </tr>
 

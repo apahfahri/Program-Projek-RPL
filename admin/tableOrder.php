@@ -221,7 +221,7 @@ $users = $stmt_users->get_result();
                                                     <td><?php echo $row['Customer'] ?></td>
                                                     <td class="text-bold-500"><?php echo $row['Worker'] ?></td>
                                                     <td><?php echo $row['Nama_Game'] ?></td>
-                                                    <td><?php echo $row['Total_Price'] ?></td>
+                                                    <td><?php echo 'Rp.' . number_format($row['Total_Price'], 0, ',', '.'); ?></td>
                                                     <td><?php echo $row['Initial_Rank'] ?></td>
                                                     <td><?php echo $row['Final_Rank'] ?></td>
                                                     <td><?php echo $row['Message'] ?></td>
