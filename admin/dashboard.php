@@ -12,7 +12,6 @@ $stmt = $conn->prepare($query);
 $stmt->execute();
 $stmt->bind_result($status, $count);
 
-// Mengambil hasil
 $counts = [];
 while ($stmt->fetch()) {
     $counts[$status] = $count;

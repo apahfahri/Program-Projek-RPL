@@ -180,6 +180,7 @@ $users = $stmt_users->get_result();
                         </div>
                     </div>
                 </section>
+                
                 <!-- Striped rows end -->
 
 
