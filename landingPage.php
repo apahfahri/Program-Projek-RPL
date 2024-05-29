@@ -26,7 +26,7 @@ include('layout/header.php')
                     <div class="carousel-item active" data-bs-interval="10000">
                         <img src="image/crsl01.jpg" class="d-block w-100" alt="...">
                     </div>
-                    <div class="carousel-item" data-bs-interval="2000">
+                    <div class="carousel-item" data-bs-interval="5000">
                         <img src="image/crsl02.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
@@ -48,8 +48,8 @@ include('layout/header.php')
     <div class="container bg-dark my-5">
         <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center border-dark shadow-lg">
             <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-                <h1 class="display-4 fw-bold lh-1 text-white">Border hero with cropped image and shadows</h1>
-                <p class="lead text-light">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+                <h1 class="display-4 fw-bold lh-1 text-white">Rank Boosting Platform</h1>
+                <p class="lead text-light">You can increase your rank without any effort here. By providing lots of games and lots of worker, Smurfer will help you to become a real gamer</p>
 
             </div>
             <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
@@ -58,39 +58,65 @@ include('layout/header.php')
         </div>
     </div>
 
-    <div class="container px-4 py-5" id="hanging-icons">
+    <div class="container px-4 py-5" id="features">
+        <h2 class="pb-2 text-light border-bottom">Features</h2>
+        <div class="row g-4 py-4 row-cols-1 row-cols-lg-3">
+            <div class="col d-flex align-items-start"> 
+                <div>
+                    <a href="index.php" class="btn btn-dark pb-0 mb-2">
+                        <h3 class="fs-2 text-white">Can to Order Service</h3>
+                    </a>
+                    <p class="text-white-50">If you are tired of losing all the time playing games, you should order our worker to increase your rank. so you just drink coffee and wait effortless</p>
+                </div>
+            </div>
+            <div class="col d-flex align-items-start">
+                <div>
+                    <a href="index.php" class="btn btn-dark pb-0 mb-2">
+                        <h3 class="fs-2 text-white">View Worker's Profile</h3>
+                    </a>
+                    <p class="text-white-50">Here you can find the specifications of our workers. <br>You can see the worker's profile when you want to order a worker for you</p>
+                </div>
+            </div>
+            <div class="col d-flex align-items-start">
+                <div>
+                    <a href="index.php" class="btn btn-dark pb-0 mb-2">
+                        <h3 class="fs-2 text-white">Available to be a Worker</h3>
+                    </a>
+                    <p class="text-white-50">If you feel good at playing the game, that's our jockey. We have provided a place for you, then you can get the results yourself</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container px-4 py-5" id="features">
         <h2 class="pb-2 text-light border-bottom">Features</h2>
         <div class="row g-4 py-4 row-cols-1 row-cols-lg-3">
             <div class="col d-flex align-items-start">
-                
                 <div>
-                    <h3 class="fs-2 text-white">Joki game rank up</h3>
-                    <p class="text-white-50">Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and
-                        probably just keep going until we run out of words.</p>
+                    <h3 class="fs-2 text-white">Can to Order Service</h3>
+                    <p class="text-white-50">If you are tired of losing all the time playing games, you should order our worker to increase your rank. so you just drink coffee and wait effortless</p>
                     <a href="#" class="btn btn-primary">
-                        Primary button
+                        Order Worker
                     </a>
                 </div>
             </div>
             <div class="col d-flex align-items-start">
-                
+
                 <div>
-                    <h3 class="fs-2 text-white">Dapat menjadi joki</h3>
-                    <p class="text-white-50">Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and
-                        probably just keep going until we run out of words.</p>
+                    <h3 class="fs-2 text-white">View Worker's Profile</h3>
+                    <p class="text-white-50">Here you can find the specifications of our workers. <br>You can see the worker's profile when you want to order a worker for you</p>
                     <a href="#" class="btn btn-primary">
-                        Primary button
+                        Order Worker
                     </a>
                 </div>
             </div>
             <div class="col d-flex align-items-start">
-                
                 <div>
-                    <h3 class="fs-2 text-white">Joki game rank up</h3>
-                    <p class="text-white-50">Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and
-                        probably just keep going until we run out of words.</p>
+                    <h3 class="fs-2 text-white">Available to be a Worker</h3>
+                    <p class="text-white-50">If you feel good at playing the game, that's our jockey. We have provided a place for you, then you can get the results yourself</p>
                     <a href="#" class="btn btn-primary">
-                        Primary button
+                        Join to Workers
                     </a>
                 </div>
             </div>
