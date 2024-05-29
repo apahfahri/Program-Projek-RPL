@@ -26,7 +26,7 @@ include('layout/header.php')
                     <div class="carousel-item active" data-bs-interval="10000">
                         <img src="image/crsl01.jpg" class="d-block w-100" alt="...">
                     </div>
-                    <div class="carousel-item" data-bs-interval="2000">
+                    <div class="carousel-item" data-bs-interval="5000">
                         <img src="image/crsl02.jpg" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
