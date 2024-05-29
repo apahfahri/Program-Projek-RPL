@@ -3,66 +3,93 @@ session_start();
 include('../server/connection.php');
 
 if (isset($_SESSION['logged_in'])) {
-    header('location: Dashboard.php');
+    header('Location: dashboard.php');
     exit;
 }
 
-if (isset($_POST['username']) && isset($_POST['password'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
-    $query = "SELECT * FROM admin WHERE username = ? AND password = ? LIMIT 1";
+        $query = "SELECT id_admin, username FROM admin WHERE username = ? AND password = ? LIMIT 1";
 
-    $stmt_login = $conn->prepare($query);
-    $stmt_login->bind_param('ss', $username, $password);
+        if ($stmt = $conn->prepare($query)) {
+            $stmt->bind_param('ss', $username, $password);
 
-    if ($stmt_login->execute()) {
-        $stmt_login->bind_result(
-            $id,
-            $username,
-            $password
-        );
-        $stmt_login->store_result();
+            if ($stmt->execute()) {
+                $stmt->store_result();
 
-        if ($stmt_login->num_rows() == 1) {
-            $stmt_login->fetch();
+                if ($stmt->num_rows == 1) {
+                    $stmt->bind_result($id, $username);
+                    $stmt->fetch();
 
-            $_SESSION['id_user'] = $id;
-            $_SESSION['username'] = $username;
-            $_SESSION['logged_in'] = true;
-                
-            header('location: dashboard.php?message=Logged in succesfully');
+                    $_SESSION['id_user'] = $id;
+                    $_SESSION['username'] = $username;
+                    $_SESSION['logged_in'] = true;
+
+                    header('Location: dashboard.php?message=Logged in successfully');
+                } else {
+                    header('Location: loginAdmin.php?error=Could not verify your account');
+                }
+            } else {
+                header('Location: loginAdmin.php?error=Something went wrong!');
+            }
+            $stmt->close();
         } else {
-            header('location: loginAdmin.php?error=Cound not verify your account');
+            header('Location: loginAdmin.php?error=Failed to prepare statement!');
         }
     } else {
-        header('location: loginAdmin.php?error=Something went wrong!');
+        header('Location: loginAdmin.php?error=Please fill both fields');
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Login - Mazer Admin Dashboard</title>
+    <link rel="shortcut icon" href="/Smurfer/dist/assets/compiled/svg/favicon.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="data:image/png;base64,...(long data uri truncated for brevity)" type="image/png">
+    <link rel="stylesheet" href="/Smurfer/dist/assets/compiled/css/app.css">
+    <link rel="stylesheet" href="/Smurfer/dist/assets/compiled/css/app-dark.css">
+    <link rel="stylesheet" href="/Smurfer/dist/assets/compiled/css/auth.css">
 </head>
+
 <body>
-    <div class="container mt-4">
-        <div class="container-fluid">
-            <form autocomplete="off" id="login-form" method="POST" action="loginAdmin.php">
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Insert Username or Email">
+    <script src="assets/static/js/initTheme.js"></script>
+    <div id="auth">
+        <div class="row h-100">
+            <div class="col-lg-5 col-12">
+                <div id="auth-left">
+                    <div class="auth-logo">
+                        <a href="index.html"><img src="/Smurfer/asset/smurfer/logo.png" alt="Logo"></a>
+                    </div>
+                    <h1 class="auth-title">Log in.</h1>
+                    <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
+                    <form action="loginAdmin.php" method="POST">
+                        <div class="form-group position-relative has-icon-left mb-3">
+                            <input type="text" name="username" class="form-control form-control-xl" placeholder="Username" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-person"></i>
+                            </div>
+                        </div>
+                        <div class="form-group position-relative has-icon-left mb-2">
+                            <input type="password" name="password" class="form-control form-control-xl" placeholder="Password" required>
+                            <div class="form-control-icon">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-4">Log in</button>
+                    </form>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Insert Password">
+            </div>
+            <div class="col-lg-7 d-none d-lg-block">
+                <div id="auth-right">
                 </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-            </form>
+            </div>
         </div>
     </div>
 </body>

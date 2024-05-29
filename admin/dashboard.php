@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['logged_in'])) {
+    header('location: loginAdmin.php');
+    exit;
+}
+
 include('../server/connection.php');
 include('dataReview.php');
 
@@ -36,6 +42,7 @@ $stmt->close();
     <link rel="stylesheet" href="../dist/assets/compiled/css/app.css">
     <link rel="stylesheet" href="../dist/assets/compiled/css/app-dark.css">
     <link rel="stylesheet" href="../dist/assets/compiled/css/iconly.css">
+    <link rel="stylesheet" href="../dist/assets/extensions/@fortawesome/fontawesome-free/css/all.min.css">
 </head>
 
 <body>
@@ -105,6 +112,12 @@ $stmt->close();
                             </a>
                         </li>
 
+                        <li class="sidebar-item ">
+                            <a href="logout.php" class='sidebar-link'>
+                                <span class="fa-fw select-all fas"></span>
+                                <span>Logout</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
