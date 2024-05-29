@@ -5,7 +5,7 @@ include('layout/header.php');
 
 $id = $_SESSION['id_user'];
 
-$query = "SELECT o.Id_Order,cus.Username as Customer,u.Username as Worker,
+$query = "SELECT o.Id_Order,cus.Username as Customer,u.Username as Worker,o.Id_Worker,
 g.Nama_Game,o.Total_Price,r1.rank as Initial_Rank,r2.rank as Final_Rank,o.Message,o.Status,g.Image
 FROM `order` o
 INNER JOIN users cus ON o.Id_User = cus.Id_User
@@ -13,19 +13,27 @@ INNER JOIN workers w ON o.Id_Worker = w.Id_Worker
 INNER JOIN users u ON w.Id_User = u.Id_User
 INNER JOIN game g ON o.Id_Game = g.Id_Game
 INNER JOIN rank r1 ON o.initial_rank = r1.Point AND g.Id_Game = r1.Id_Game
-INNER JOIN rank r2 ON o.final_rank = r2.Point AND g.Id_Game = r2.Id_Game";
+INNER JOIN rank r2 ON o.final_rank = r2.Point AND g.Id_Game = r2.Id_Game
+where w.Id_User = $id";
 
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $result = $stmt->get_result();
 $stmt->close();
 
+$stmt3 = $conn->prepare($query);
+$stmt3->execute();
+$result2 = $stmt3->get_result();
+$row = $result2->fetch_row();
+$idWrkr = $row[3];
+$stmt3->close();
+
 $query2 =
     "SELECT 'Customer' AS Status, COUNT(*) AS count FROM users WHERE Status = 'Customer'
     UNION ALL
     SELECT 'Worker', COUNT(*) FROM users WHERE Status = 'Worker'
     UNION ALL
-    SELECT 'Order', COUNT(*) FROM `Order` where Id_User = $id";
+    SELECT 'Order', COUNT(*) FROM `Order` where Id_Worker = $idWrkr";
 $stmt2 = $conn->prepare($query2);
 $stmt2->execute();
 $stmt2->bind_result($status, $count);
@@ -41,7 +49,7 @@ $stmt2->close();
 <html>
 
 <head>
-    <title>Profil Pengguna</title>
+    <title>Worker Profile</title>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -225,30 +233,31 @@ $stmt2->close();
                 <div class="tab-pane fade show active" id="pills-order" role="tabpanel" aria-labelledby="pills-order-tab" tabindex="0">
                     <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
                         <h3 class="mb-3 mb-sm-0 fw-semibold text-white d-flex align-items-center">Order<span class="badge text-bg-secondary fs-2 rounded-4 py-1 px-2 ms-2"><?php echo $counts['Order'] ?></span></h3>
-                        
+
                     </div>
                     <div class="row">
                         <?php while ($row = $result->fetch_assoc()) { ?>
-                        <div class=" col-md-6 col-xl-4">
-                            <div class="card bg-secondary shadow">
-                                <div class="card-body p-4 d-flex align-items-center gap-3">
-                                    <img src="asset/logo_game/<?php echo $row['Image'] ?>" alt="" class="object-fit-sm-cover border rounded" width="100px" height="100px">
-                                    <div>
-                                        <h5 class="fw-bold mb-2 text-white"><?php echo $row['Nama_Game'] ?></h5>
-                                        <p class="fw-light text-white mb-0">Worker: <?php echo $row['Worker'] ?></p>
-                                        <p class="fw-light text-white mb-0">Price: <?php echo $row['Total_Price'] ?></p>
-                                        <p class="fw-light text-white mb-0">Message: <?php echo $row['Message'] ?></p>
+                            <div class=" col-md-6 col-xl-4">
+                                <div class="card bg-secondary shadow">
+                                    <div class="card-body p-4 d-flex align-items-center gap-3">
+                                        <img src="asset/logo_game/<?php echo $row['Image'] ?>" alt="" class="object-fit-sm-cover border rounded" width="100px" height="100px">
+                                        <div>
+                                            <h5 class="fw-bold mb-0 text-white"><?php echo $row['Nama_Game'] ?> :</h5>
+                                            <p class="fw-semibold text-white mb-1"><?php echo $row['Initial_Rank'] ?> -> <?php echo $row['Final_Rank'] ?></p>
+                                            <p class="fw-light text-white mb-0">Customer: <?php echo $row['Customer'] ?></p>
+                                            <p class="fw-light text-white mb-0">Price: <?php echo $row['Total_Price'] ?></p>
+                                            <p class="fw-light text-white mb-0">Message: <?php echo $row['Message'] ?></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         <?php } ?>
                     </div>
                 </div>
             </div>
             <div class="tab-pane fade show active" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab" tabindex="0">
                 <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
-                <h3 class="mb-3 mb-sm-0 fw-semibold text-white d-flex align-items-center">Review<span class="badge text-bg-secondary fs-2 rounded-4 py-1 px-2 ms-2"><?php echo $counts['Order'] ?></span></h3>
+                    <h3 class="mb-3 mb-sm-0 fw-semibold text-white d-flex align-items-center">Review<span class="badge text-bg-secondary fs-2 rounded-4 py-1 px-2 ms-2"><?php echo $counts['Order'] ?></span></h3>
                     <form class="position-relative">
                         <input type="text" class="form-control search-chat py-2 ps-5" id="text-srh" placeholder="Search Review">
                         <i class="ti ti-search position-absolute top-50 start-0 translate-middle-y text-dark ms-3"></i>
