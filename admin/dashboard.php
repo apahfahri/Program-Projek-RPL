@@ -1,8 +1,9 @@
 <?php
 session_start();
 include('../server/connection.php');
+include('dataReview.php');
 
-$query = 
+$query =
     "SELECT 'Customer' AS Status, COUNT(*) AS count FROM users WHERE Status = 'Customer'
     UNION ALL
     SELECT 'Worker', COUNT(*) FROM users WHERE Status = 'Worker'
@@ -10,7 +11,7 @@ $query =
     SELECT 'Order', COUNT(*) FROM `Order` WHERE Status_Payment = 'Paid'
     UNION ALL
     SELECT 'Profit', SUM(Total_Price) FROM `Order` WHERE Status_Payment = 'Paid'";
-    
+
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $stmt->bind_result($status, $count);
@@ -265,11 +266,12 @@ $stmt->close();
                                 </div>
                             </div>
 
+
                             <!-- Review -->
                             <div class="col-12 col-xl-8">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4>Latest Comments</h4>
+                                        <h4>Latest Review</h4>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -277,45 +279,31 @@ $stmt->close();
                                                 <thead>
                                                     <tr>
                                                         <th>Name</th>
-                                                        <th>Comment</th>
+                                                        <th>Review</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td class="col-3">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar avatar-md">
-                                                                    <img src="../dist/assets/compiled/jpg/5.jpg">
+                                                    <?php foreach ($reviews as $review) : ?>
+                                                        <tr>
+                                                            <td class="col-3">
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="avatar avatar-md">
+                                                                        <img src="/Smurfer/image/<?php echo $review['foto']; ?>" alt="Customer Photo">
+                                                                    </div>
+                                                                    <p class="font-bold ms-3 mb-0"><?php echo $review['customer_name']; ?></p>
                                                                 </div>
-                                                                <p class="font-bold ms-3 mb-0">Si Cantik</p>
-                                                            </div>
-                                                        </td>
-                                                        <td class="col-auto">
-                                                            <p class=" mb-0">Congratulations on your graduation!</p>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-3">
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar avatar-md">
-                                                                    <img src="../dist/assets/compiled/jpg/2.jpg">
-                                                                </div>
-                                                                <p class="font-bold ms-3 mb-0">Si Ganteng</p>
-                                                            </div>
-                                                        </td>
-                                                        <td class="col-auto">
-                                                            <p class=" mb-0">Wow amazing design! Can you make another tutorial for
-                                                                this design?</p>
-                                                        </td>
-                                                    </tr>
+                                                            </td>
+                                                            <td class="col-auto">
+                                                                <p class="mb-0"><?php echo $review['review']; ?></p>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
                 </section>
             </div>
@@ -339,7 +327,7 @@ $stmt->close();
     <!-- Need: Apexcharts -->
     <script src="../dist/assets/extensions/apexcharts/apexcharts.min.js"></script>
     <script src="../dist/assets/static/js/pages/dashboard.js"></script>
-    
+
 </body>
 
 </html>

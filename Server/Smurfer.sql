@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `game` (
   PRIMARY KEY (`Id_Game`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
 
--- Dumping data for table smurfer.game: ~6 rows (approximately)
+-- Dumping data for table smurfer.game: ~5 rows (approximately)
 DELETE FROM `game`;
 INSERT INTO `game` (`Id_Game`, `Nama_Game`, `Image`) VALUES
 	(1, 'Mobile Legends', 'Mobile Legends.jpeg'),
@@ -61,6 +61,15 @@ CREATE TABLE IF NOT EXISTS `order` (
   `Final_Rank` int(11) DEFAULT NULL,
   `Message` varchar(50) DEFAULT NULL,
   `Status` varchar(50) DEFAULT 'Pending',
+  `Status_Payment` varchar(50) DEFAULT 'Unpaid',
+  `Payment_Method` varchar(50) DEFAULT NULL,
+  `Proof_Transaction` varchar(50) DEFAULT NULL,
+  `Game_Username` varchar(50) DEFAULT NULL,
+  `Game_Password` varchar(50) DEFAULT NULL,
+  `Result` varchar(50) DEFAULT NULL,
+  `Review` varchar(50) DEFAULT NULL,
+  `Rating` int(11) DEFAULT NULL,
+  `date` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`Id_Order`),
   KEY `FK_order_users` (`Id_User`),
   KEY `FK_order_game` (`Id_Game`),
@@ -68,16 +77,12 @@ CREATE TABLE IF NOT EXISTS `order` (
   CONSTRAINT `FK_order_game` FOREIGN KEY (`Id_Game`) REFERENCES `game` (`Id_Game`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_order_users` FOREIGN KEY (`Id_User`) REFERENCES `users` (`Id_User`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_order_workers` FOREIGN KEY (`Id_Worker`) REFERENCES `workers` (`Id_Worker`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
 
--- Dumping data for table smurfer.order: ~5 rows (approximately)
+-- Dumping data for table smurfer.order: ~1 rows (approximately)
 DELETE FROM `order`;
-INSERT INTO `order` (`Id_Order`, `Id_User`, `Id_Worker`, `Id_Game`, `Total_Price`, `Initial_Rank`, `Final_Rank`, `Message`, `Status`) VALUES
-	(1, 3, 1, 2, 45000, 1, 7, 'Selesai 2 minggu bang pake reyna kalo bisa', 'Declined'),
-	(2, 3, 1, 2, 35000, 1, 6, '', 'Canceled'),
-	(3, 3, 3, 5, 14000, 2, 4, '', 'Canceled'),
-	(4, 3, 1, 2, 1085000, 1, 24, '', 'Declined'),
-	(5, 3, 1, 2, 90000, 2, 11, 'Kalo bisa pake duelist terus', 'Canceled');
+INSERT INTO `order` (`Id_Order`, `Id_User`, `Id_Worker`, `Id_Game`, `Total_Price`, `Initial_Rank`, `Final_Rank`, `Message`, `Status`, `Status_Payment`, `Payment_Method`, `Proof_Transaction`, `Game_Username`, `Game_Password`, `Result`, `Review`, `Rating`, `date`) VALUES
+	(1, 3, 1, 2, 650000, 13, 22, 'Pake duelist yah bang', 'Done', 'Paid', 'Gopay', 'uploads/3.jpg', 'Phyyy2', '321', 'uploads/results/3.jpg', '1233R4', 3, '2024-05-29 11:06:48');
 
 -- Dumping structure for table smurfer.rank
 CREATE TABLE IF NOT EXISTS `rank` (
@@ -183,14 +188,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`Id_User`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
 
--- Dumping data for table smurfer.users: ~7 rows (approximately)
+-- Dumping data for table smurfer.users: ~8 rows (approximately)
 DELETE FROM `users`;
 INSERT INTO `users` (`Id_User`, `Username`, `Email`, `Password`, `Status`, `Foto`) VALUES
 	(1, 'lutfi ', 'lutfi3522@gmail.com', '123', 'Worker', 'profile.jpeg'),
 	(2, 'Axel', 'axel123@gmail.com', '123', 'Worker', 'profile.jpeg'),
 	(3, 'fahri', 'fahri123@gmail.com', '123', 'Customer', 'default2.jpg'),
 	(4, 'Egi', 'egi123@gmail.com', '123', 'Worker', 'profile.jpeg'),
-	(6, 'Phyyy', 'lutfi123@gmail.com', '123', 'Customer', 'profile.jpeg'),
+	(6, 'Phyyy', 'lutfi123@gmail.com', '123', 'Worker', 'profile.jpeg'),
 	(8, 'lutfi', 'lutfi123@gmail.com', '123', 'Customer', 'default2.jpg'),
 	(9, 'pii', '123@gmail.com', '123', 'Customer', 'default2.jpg'),
 	(10, '123', '12345', '123', 'Customer', 'default2.jpg');
@@ -215,7 +220,7 @@ INSERT INTO `workers` (`Id_Worker`, `Id_User`, `Id_Game`, `Rating`, `Exp`) VALUE
 	(1, 1, 2, 4.5, NULL),
 	(2, 2, 6, 0, NULL),
 	(3, 4, 5, 0, NULL),
-	(4, 6, 3, 0, NULL);
+	(4, 6, 4, 0, NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
