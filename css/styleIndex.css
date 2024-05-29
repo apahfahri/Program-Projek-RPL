@@ -91,3 +91,24 @@ img {
 h5 {
     color: white;
 }
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+.star-rating input[type="radio"] {
+    display: none;
+}
+.star-rating label {
+    font-size: 2em;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.star-rating input[type="radio"]:checked ~ label {
+    color: #f2b01e;
+}
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #f2b01e;
+}
