@@ -10,6 +10,7 @@ if (isset($_POST['initial']) && isset($_POST['final'])) {
     $initial = $_POST['initial'];
     $final = $_POST['final'];
     $message = $_POST['message'];
+    $current_date = date('Y-m-d H:i:s'); 
 
     $Id_User = mysqli_real_escape_string($conn, $Id_User);
     $Id_Worker = mysqli_real_escape_string($conn, $Id_Worker);
@@ -19,10 +20,10 @@ if (isset($_POST['initial']) && isset($_POST['final'])) {
     $final = mysqli_real_escape_string($conn, $final);
     $message = mysqli_real_escape_string($conn, $message);
 
-    $query = "INSERT INTO `order` (Id_User, Id_Worker, Id_Game, total_price, initial_rank, final_rank, message) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO `order` (Id_User, Id_Worker, Id_Game, total_price, initial_rank, final_rank, message, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     
     if ($stmt = $conn->prepare($query)) {
-        $stmt->bind_param("iiiiiis", $Id_User, $Id_Worker, $Id_Game, $total_price, $initial, $final, $message);
+        $stmt->bind_param("iiiiiiss", $Id_User, $Id_Worker, $Id_Game, $total_price, $initial, $final, $message, $current_date);
         $stmt->execute();
         $stmt->close();
     

@@ -3,7 +3,7 @@ session_start();
 include('layout/header.php');
 include('server/connection.php');
 
-$query = "SELECT o.Id_Order, u.Username, g.Nama_Game, g.Image, r1.rank as Initial_Rank, r2.rank as Final_Rank, o.Total_Price, o.Status
+$query = "SELECT o.Id_Order, u.Username, g.Nama_Game, g.Image, r1.rank as Initial_Rank, r2.rank as Final_Rank, o.Total_Price, o.Status, o.Status_Payment
           FROM `order` o
           INNER JOIN workers w ON o.Id_Worker = w.Id_Worker
           INNER JOIN users u ON w.Id_User = u.Id_User
@@ -64,7 +64,7 @@ $result = $stmt->get_result();
                                                     <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
                                                     <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
                                                 </form>
-                                            <?php } else if ($row['Status'] == 'Accepted') { ?>
+                                            <?php } else if ($row['Status'] == 'Accepted' && $row['Status_Payment'] == 'Unpaid') { ?>
                                                 <form action="paymentPage.php" method="POST" style="display:inline;">
                                                     <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
                                                     <button type="submit" class="btn btn-primary btn-sm">Make Payment</button>
@@ -73,7 +73,7 @@ $result = $stmt->get_result();
                                                     <input type="hidden" name="order_id" value="<?php echo $row['Id_Order']; ?>">
                                                     <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
                                                 </form>
-                                            <?php } else { ?>
+                                            <?php } else if ($row['Status'] == 'Done') { ?>
                                                 <button class="btn btn-secondary btn-sm" disabled>Delete</button>
                                             <?php } ?>
                                         </div>
