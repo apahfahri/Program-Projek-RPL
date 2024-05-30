@@ -39,7 +39,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             }
 
             if ($status == 'Customer') {
-                header('location: index.php?message=Logged in successfully');
+                header('location: landingPage.php?message=Logged in successfully');
             } else {
                 header('location: workerPage.php?message=Logged in successfully');
             }

@@ -294,7 +294,7 @@ if ($_SESSION['status'] == 'Worker') {
                                         <p class="mb-0 fs-4">Orders</p>
                                     </div>
                                 </div>
-                                <a href="#">
+                                <a href="https://wa.link/ygcguz">
                                     <button class="btn btn-primary">Join to be Worker</button>
                                 </a>
                             </div>

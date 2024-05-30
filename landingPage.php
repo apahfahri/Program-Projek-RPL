@@ -58,7 +58,7 @@ include('layout/header.php')
         </div>
     </div>
 
-    <div class="container px-4 py-5" id="features">
+    <!-- <div class="container px-4 py-5" id="features">
         <h2 class="pb-2 text-light border-bottom">Features</h2>
         <div class="row g-4 py-4 row-cols-1 row-cols-lg-3">
             <div class="col d-flex align-items-start"> 
@@ -87,7 +87,7 @@ include('layout/header.php')
             </div>
 
         </div>
-    </div>
+    </div> -->
 
     <div class="container px-4 py-5" id="features">
         <h2 class="pb-2 text-light border-bottom">Features</h2>
@@ -115,7 +115,7 @@ include('layout/header.php')
                 <div>
                     <h3 class="fs-2 text-white">Available to be a Worker</h3>
                     <p class="text-white-50">If you feel good at playing the game, that's our jockey. We have provided a place for you, then you can get the results yourself</p>
-                    <a href="#" class="btn btn-primary">
+                    <a href="https://wa.link/ygcguz" class="btn btn-primary">
                         Join to Workers
                     </a>
                 </div>
