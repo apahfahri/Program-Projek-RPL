@@ -16,7 +16,19 @@ $query =
     UNION ALL
     SELECT 'Order', COUNT(*) FROM `Order` WHERE Status_Payment = 'Paid'
     UNION ALL
-    SELECT 'Profit', SUM(Total_Price) FROM `Order` WHERE Status_Payment = 'Paid'";
+    SELECT 'Profit', SUM(Total_Price) FROM `Order` WHERE Status_Payment = 'Paid'
+    UNION ALL
+    SELECT 'ML', COUNT(*) FROM `Order` WHERE Id_Game = 1
+    UNION ALL
+    SELECT 'Valorant', COUNT(*) FROM `Order` WHERE Id_Game = 2
+    UNION ALL
+    SELECT 'CS', COUNT(*) FROM `Order` WHERE Id_Game = 3
+    UNION ALL
+    SELECT 'DOTA', COUNT(*) FROM `Order` WHERE Id_Game = 4
+    UNION ALL
+    SELECT 'LOL', COUNT(*) FROM `Order` WHERE Id_Game = 5
+    UNION ALL
+    SELECT 'PUBG', COUNT(*) FROM `Order` WHERE Id_Game = 6";
 
 $stmt = $conn->prepare($query);
 $stmt->execute();
@@ -27,7 +39,6 @@ while ($stmt->fetch()) {
     $counts[$status] = $count;
 }
 $stmt->close();
-
 ?>
 
 <!DOCTYPE html>
@@ -233,14 +244,11 @@ $stmt->close();
                                                     <svg class="bi text-primary" width="32" height="32" fill="blue" style="width:10px">
                                                         <use xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
                                                     </svg>
-                                                    <h5 class="mb-0 ms-3">Mobile Legends</h5>
+                                                    <h5 class="mb-3 ms-3">Mobile Legends</h5>
                                                 </div>
                                             </div>
                                             <div class="col-5">
-                                                <h5 class="mb-0 text-end">862</h5>
-                                            </div>
-                                            <div class="col-12">
-                                                <div id="chart-europe"></div>
+                                                <h5 class="mb-0 text-end"><?php echo $counts['ML'] ?></h5>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -249,14 +257,11 @@ $stmt->close();
                                                     <svg class="bi text-success" width="32" height="32" fill="blue" style="width:10px">
                                                         <use xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
                                                     </svg>
-                                                    <h5 class="mb-0 ms-3">Valorant</h5>
+                                                    <h5 class="mb-3 ms-3">Valorant</h5>
                                                 </div>
                                             </div>
                                             <div class="col-5">
-                                                <h5 class="mb-0 text-end">375</h5>
-                                            </div>
-                                            <div class="col-12">
-                                                <div id="chart-america"></div>
+                                                <h5 class="mb-0 text-end"><?php echo $counts['Valorant'] ?></h5>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -265,14 +270,50 @@ $stmt->close();
                                                     <svg class="bi text-danger" width="32" height="32" fill="blue" style="width:10px">
                                                         <use xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
                                                     </svg>
-                                                    <h5 class="mb-0 ms-3">League Of Legends</h5>
+                                                    <h5 class="mb-3 ms-3">Counter Strike 2</h5>
                                                 </div>
                                             </div>
                                             <div class="col-5">
-                                                <h5 class="mb-0 text-end">1025</h5>
+                                                <h5 class="mb-0 text-end"><?php echo $counts['CS'] ?></h5>
                                             </div>
-                                            <div class="col-12">
-                                                <div id="chart-indonesia"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <div class="d-flex align-items-center">
+                                                    <svg class="bi text-primary" width="32" height="32" fill="blue" style="width:10px">
+                                                        <use xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
+                                                    </svg>
+                                                    <h5 class="mb-3 ms-3">Dota 2</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-5">
+                                                <h5 class="mb-0 text-end"><?php echo $counts['DOTA'] ?></h5>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <div class="d-flex align-items-center">
+                                                    <svg class="bi text-success" width="32" height="32" fill="blue" style="width:10px">
+                                                        <use xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
+                                                    </svg>
+                                                    <h5 class="mb-3 ms-3">League Of Legends</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-5">
+                                                <h5 class="mb-0 text-end"><?php echo $counts['LOL'] ?></h5>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <div class="d-flex align-items-center">
+                                                    <svg class="bi text-danger" width="32" height="32" fill="blue" style="width:10px">
+                                                        <use xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
+                                                    </svg>
+                                                    <h5 class="mb-3 ms-3">PUBG Mobile</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-5">
+                                                <h5 class="mb-0 text-end"><?php echo $counts['PUBG'] ?></h5>
                                             </div>
                                         </div>
                                     </div>
