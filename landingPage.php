@@ -58,7 +58,7 @@ include('layout/header.php')
         </div>
     </div>
 
-    <div class="container px-4 py-5" id="features">
+    <!-- <div class="container px-4 py-5" id="features">
         <h2 class="pb-2 text-light border-bottom">Features</h2>
         <div class="row g-4 py-4 row-cols-1 row-cols-lg-3">
             <div class="col d-flex align-items-start"> 
@@ -87,7 +87,7 @@ include('layout/header.php')
             </div>
 
         </div>
-    </div>
+    </div> -->
 
     <div class="container px-4 py-5" id="features">
         <h2 class="pb-2 text-light border-bottom">Features</h2>
