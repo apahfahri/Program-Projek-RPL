@@ -153,7 +153,6 @@ $users = $stmt_users->get_result();
                                                 <tr>
                                                     <th>USERNAME</th>
                                                     <th>EMAIL</th>
-                                                    <th>PASSWORD</th>
                                                     <th>GAME</th>
                                                     <th>STATUS</th>
                                                     <th>PHOTO</th>
@@ -165,11 +164,12 @@ $users = $stmt_users->get_result();
                                                     <tr>
                                                         <td class="text-bold-500"><?php echo $row['Username'] ?></td>
                                                         <td><?php echo $row['Email'] ?></td>
-                                                        <td class="text-bold-500"><?php echo $row['Password'] ?></td>
                                                         <td><?php echo $row['Nama_Game'] ?></td>
                                                         <td><?php echo $row['Status'] ?></td>
                                                         <td><img src="../image/<?php echo $row['Foto'] ?>" alt="" width="32" height="32" class="rounded-circle"></td>
-                                                        <td><a href="#"><i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="mail"></i></a></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalChange" data-id="<?php echo $row['Id_User']; ?>"><i data-feather="mail"></i></button>
+                                                        </td>
                                                     </tr>
 
                                                 </tbody>
@@ -183,6 +183,26 @@ $users = $stmt_users->get_result();
                 </section>
                 <!-- Striped rows end -->
 
+                <div class="modal fade" id="modalChange" tabindex="-1" data-bs-backdrop="static" aria-labelledby="modalReviewLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="ReviewLabel">Change Worker To Customer</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="changeForm" action="actionWorkerToCustomer.php" method="POST">
+                                    <h5>Are you sure you turn workers into customers?</h5>
+                                    <input type="hidden" id="customerId" name="customerId">
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <footer>
                     <div class="footer clearfix mb-0 text-muted">
@@ -208,3 +228,16 @@ $users = $stmt_users->get_result();
 </body>
 
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modalChange = document.getElementById('modalChange');
+
+        modalChange.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;
+            var customerId = button.getAttribute('data-id');
+
+            document.getElementById('customerId').value = customerId;
+        });
+    });
+</script>

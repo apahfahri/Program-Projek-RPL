@@ -158,12 +158,9 @@ $users = $stmt_users->get_result();
                                                         <td><?php echo $row['Status'] ?></td>
                                                         <td><img src="../image/<?php echo $row['Foto'] ?>" alt="" width="32" height="32" class="rounded-circle"></td>
                                                         <td>
-                                                            <a href="#">
-                                                                <i class="badge-circle badge-circle-light-secondary font-medium-1" data-feather="mail"></i>
-                                                            </a>
+                                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalChange" data-id="<?php echo $row['Id_User']; ?>"><i data-feather="mail"></i></button>
                                                         </td>
                                                     </tr>
-
                                                 </tbody>
                                             <?php } ?>
                                         </table>
@@ -173,9 +170,36 @@ $users = $stmt_users->get_result();
                         </div>
                     </div>
                 </section>
-                
                 <!-- Striped rows end -->
 
+                <div class="modal fade" id="modalChange" tabindex="-1" data-bs-backdrop="static" aria-labelledby="modalReviewLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="ReviewLabel">Select Game Worker</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="changeForm" action="actionCustomerToWorker.php" method="POST">
+                                    <input type="hidden" id="customerId" name="customer_id">
+                                    <select class="form-select" name="game_id">
+                                        <option selected>Select Game</option>
+                                        <option value="1">Mobile Legends</option>
+                                        <option value="2">Valorant</option>
+                                        <option value="3">Counter Strike 2</option>
+                                        <option value="4">Dota 2</option>
+                                        <option value="5">League Of Legends</option>
+                                        <option value="6">PUBG Mobile</option>
+                                    </select>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <footer>
                     <div class="footer clearfix mb-0 text-muted">
@@ -195,9 +219,19 @@ $users = $stmt_users->get_result();
 
 
         <script src="../dist/assets/compiled/js/app.js"></script>
-
-
-
 </body>
 
 </html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modalChange = document.getElementById('modalChange');
+
+        modalChange.addEventListener('show.bs.modal', function(event) {
+            var button = event.relatedTarget;
+            var orderId = button.getAttribute('data-id');
+
+            document.getElementById('customerId').value = orderId;
+        });
+    });
+</script>
