@@ -8,4 +8,5 @@
     $stmt_game->execute();
 
     $game = $stmt_game->get_result();
+    
 ?>

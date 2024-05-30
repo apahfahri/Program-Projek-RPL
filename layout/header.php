@@ -11,7 +11,7 @@
 <body>
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark nav-underline shadow mb-3">
     <div class="container-fluid">
-      <a class="navbar-brand" href="landingPage.php">
+      <a class="navbar-brand" href="/landingPage.php">
         <img src="./asset/smurfer/logo.png" alt="Logo" width="125" class="d-inline-block align-text-top ml-4">
       </a>
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -26,8 +26,7 @@
         </ul>
         <form class="d-flex ms-auto p-2" role="profile">
           <?php
-          if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-          ?>
+          if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
             <div class="d-flex align-items-center">
               <div class="flex-shrink-0 dropdown-lg">
                 <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -47,10 +46,8 @@
                   <li>
                     <hr class="dropdown-divider">
                   </li>
-                  <li><a class="dropdown-item text-light" href="/Smurfer/myOrder.php">My Order</a></li>
-                  <?php if (($_SESSION['status']) == 'Worker') { ?>
-                    <li><a class="dropdown-item text-light" href="/Smurfer/workerPage.php">My Jobs</a></li>
-                  <?php } ?>
+                  <li><a class="dropdown-item text-light" href="myOrder.php">My Order</a></li>
+                  <li><a class="dropdown-item text-light" href="#">Settings</a></li>
                   <li><a class="dropdown-item text-light" href="profilePage.php">Profile</a></li>
                   <li>
                     <hr class="dropdown-divider">
@@ -64,6 +61,7 @@
           }
           ?>
         </form>
+
       </div>
     </div>
   </nav>

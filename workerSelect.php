@@ -33,15 +33,13 @@ include('Server/price.php');
                     <div class="card text-bg-dark shadow scale">
                         <img src="image/<?php echo $row['Foto'] ?>" class="card-img-top" alt="gambar">
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $row['Username'] ?></h5>
-                            <p class="card-text"> <span style="color: yellow;"><i class="fa-regular fa-star"></i></span>
-                                <?php echo $row['Rating'] ?></p>
+                            <h5 class="card-title mb-3"><?php echo $row['Username'] ?></h5>
                             <?php if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) { ?>
                                 <button type="button" class="btn btn-primary orderButton" data-bs-toggle="modal" data-bs-target="#orderModal" data-idWorker="<?= $row['Id_Worker'] ?>" data-idGame="<?php echo $_GET['game'] ?>" data-idUser='<?php echo $_SESSION['id_user'] ?>'><i class="fa-solid fa-file-contract"></i> Order</button>
                             <?php } else { ?>
                                 <button type="button" class="btn btn-primary" onclick="showAlert()"> <i class="fa-solid fa-file-contract"></i> Order</button>
                             <?php } ?>
-                            <a href="#" class="btn btn-warning"> <i class="fa-regular fa-address-card"></i> Profile</a>
+                            <a href="profileWorkerPage.php?id=<?php echo $row['Id_Worker'] ?>" class="btn btn-warning"> <i class="fa-regular fa-address-card"></i> Profile</a>
                         </div>
                     </div>
                 </div>
