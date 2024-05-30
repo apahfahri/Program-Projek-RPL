@@ -58,7 +58,7 @@ if (isset($_GET['id'])) {
 
 
         $rating = $counts['Rating'] / $counts['Review'];
-    }else {
+    } else {
         $rating = 0;
     }
 } else {
@@ -75,6 +75,7 @@ if (isset($_GET['id'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styleIndex.css">
+    <script src="https://kit.fontawesome.com/5f166431bc.js" crossorigin="anonymous"></script>
     <style>
         .img-fluid {
             max-width: 100%;
@@ -222,19 +223,25 @@ if (isset($_GET['id'])) {
                     <div class="col-lg-4 mt-n3 order-lg-2 order-1 ">
                         <div class="d-flex align-items-center justify-content-around m-4">
                             <div class="text-center text-white">
-                                <i class="fa fa-file fs-6 d-block mb-2"></i>
                                 <h4 class="mb-1 fw-semibold lh-1"><?php echo $rating ?></h4>
-                                <p class="mb-0 fs-4">Rating</p>
-                            </div>
+                                <div class="d-flex flex-row justify-content-center gap-1">
+                                    <span style="color: yellow;"><i class="fa-solid fa-star"></i></span>
+                                    <p class="mb-0 fs-4">Rating</p>
+                                </div>
+                            </div>  
                             <div class="text-center text-white">
-                                <i class="fa fa-file fs-6 d-block mb-2"></i>
                                 <h4 class="mb-1 fw-semibold lh-1"><?php echo $counts['Review'] ?></h4>
-                                <p class="mb-0 fs-4">Reviews</p>
+                                <div class="d-flex flex-row justify-content-center gap-1">
+                                    <span style="color: whitesmoke;"><i class="fa-solid fa-eye"></i></span>
+                                    <p class="mb-0 fs-4">Reviews</p>
+                                </div>
                             </div>
                             <div class="text-center text-white">
-                                <i class="fa fa-file fs-6 d-block mb-2"></i>
                                 <h4 class="mb-1 fw-semibold lh-1"><?php echo $counts['Order'] ?></h4>
-                                <p class="mb-0 fs-4">Orders</p>
+                                <div class="d-flex flex-row justify-content-center gap-1">
+                                    <span style="color: whitesmoke;"><i class="fa-solid fa-basket-shopping"></i></span>
+                                    <p class="mb-0 fs-4">Orders</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -244,7 +251,7 @@ if (isset($_GET['id'])) {
                 <ul class="nav nav-pills user-profile-tab justify-content-start mt-2 bg-light-info rounded-2" id="pills-tab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link position-relative rounded-0 active d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-review-tab" data-bs-toggle="pill" data-bs-target="#pills-review" type="button" role="tab" aria-controls="pills-review" aria-selected="false" tabindex="-1">
-                            <i class="fa fa-heart me-2 fs-6"></i>
+                            <i class="fa-solid fa-eye me-2 fs-6"></i>
                             <span class="d-none d-md-block">Review</span>
                         </button>
                     </li>

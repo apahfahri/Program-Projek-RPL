@@ -55,16 +55,33 @@ if ($_SESSION['status'] == 'Worker') {
     INNER JOIN game g ON o.Id_Game = g.Id_Game
     INNER JOIN rank r1 ON o.initial_rank = r1.Point AND g.Id_Game = r1.Id_Game
     INNER JOIN rank r2 ON o.final_rank = r2.Point AND g.Id_Game = r2.Id_Game
-    where cus.Id_User = $idCustomer or w.Id_User = $idWorker";
+    where cus.Id_User = $idCustomer ";
 
-        $stmt = $conn->prepare($query02);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $stmt->close();
+        $stmt01 = $conn->prepare($query02);
+        $stmt01->execute();
+        $result_Order = $stmt01->get_result();
+        $stmt01->close();
+
+        $query03 = "SELECT o.Id_Order,cus.Username as Customer,u.Username as Worker,w.Id_User,
+    g.Nama_Game,o.Total_Price,r1.rank as Initial_Rank,r2.rank as Final_Rank,o.Message,o.Status,g.Image,
+    cus.Foto as Foto_Customer, o.Review, o.Rating
+    FROM `order` o
+    INNER JOIN users cus ON o.Id_User = cus.Id_User
+    INNER JOIN workers w ON o.Id_Worker = w.Id_Worker
+    INNER JOIN users u ON w.Id_User = u.Id_User
+    INNER JOIN game g ON o.Id_Game = g.Id_Game
+    INNER JOIN rank r1 ON o.initial_rank = r1.Point AND g.Id_Game = r1.Id_Game
+    INNER JOIN rank r2 ON o.final_rank = r2.Point AND g.Id_Game = r2.Id_Game
+    where w.Id_Worker = $idWorker ";
+
+        $stmt02 = $conn->prepare($query03);
+        $stmt02->execute();
+        $result_Review = $stmt02->get_result();
+        $stmt02->close();
 
         if ($counts['Review'] > 0) {
             $rating = $counts['Rating'] / $counts['Review'];
-        }else{
+        } else {
             $rating = 0;
         }
     } else {
@@ -108,7 +125,6 @@ if ($_SESSION['status'] == 'Worker') {
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();
-
     } else {
     }
 }
@@ -123,6 +139,7 @@ if ($_SESSION['status'] == 'Worker') {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styleIndex.css">
+    <script src="https://kit.fontawesome.com/5f166431bc.js" crossorigin="anonymous"></script>
     <style>
         .img-fluid {
             max-width: 100%;
@@ -271,30 +288,40 @@ if ($_SESSION['status'] == 'Worker') {
                         <div class="col-lg-4 mt-n3 order-lg-2 order-1">
                             <div class="d-flex align-items-center justify-content-around m-4">
                                 <div class="text-center text-white">
-                                    <i class="fa fa-file fs-6 d-block mb-2"></i>
-                                    <h4 class="mb-0 fw-semibold lh-1"><?php echo $counts['Order'] ?></h4>
-                                    <p class="mb-0 fs-4">Orders</p>
+                                    <h4 class="mb-1 fw-semibold lh-1"><?php echo $counts['Order'] ?></h4>
+                                    <div class="d-flex flex-row justify-content-center gap-1">
+                                        <span style="color: whitesmoke;"><i class="fa-solid fa-basket-shopping"></i></span>
+                                        <p class="mb-0 fs-4">Orders</p>
+                                    </div>
                                 </div>
-                                <button class="btn btn-primary">Join to be Worker</button>
+                                <a href="#">
+                                    <button class="btn btn-primary">Join to be Worker</button>
+                                </a>
                             </div>
                         </div>
                     <?php } else if ($counts['User'] == 'Worker') { ?>
                         <div class="col-lg-4 mt-n3 order-lg-2 order-1 ">
                             <div class="d-flex align-items-center justify-content-around m-4">
                                 <div class="text-center text-white">
-                                    <i class="fa fa-file fs-6 d-block mb-2"></i>
-                                    <h4 class="mb-0 fw-semibold lh-1"><?php echo $rating ?></h4>
-                                    <p class="mb-0 fs-4">Rating</p>
+                                    <h4 class="mb-1 fw-semibold lh-1"><?php echo $rating ?></h4>
+                                    <div class="d-flex flex-row justify-content-center gap-1">
+                                        <span style="color: yellow;"><i class="fa-solid fa-star"></i></span>
+                                        <p class="mb-0 fs-4">Rating</p>
+                                    </div>
                                 </div>
                                 <div class="text-center text-white">
-                                    <i class="fa fa-file fs-6 d-block mb-2"></i>
-                                    <h4 class="mb-0 fw-semibold lh-1"><?php echo $counts['Review'] ?></h4>
-                                    <p class="mb-0 fs-4">Reviews</p>
+                                    <h4 class="mb-1 fw-semibold lh-1"><?php echo $counts['Review'] ?></h4>
+                                    <div class="d-flex flex-row justify-content-center gap-1">
+                                        <span style="color: whitesmoke;"><i class="fa-solid fa-eye"></i></span>
+                                        <p class="mb-0 fs-4">Reviews</p>
+                                    </div>
                                 </div>
                                 <div class="text-center text-white">
-                                    <i class="fa fa-file fs-6 d-block mb-2"></i>
-                                    <h4 class="mb-0 fw-semibold lh-1"><?php echo $counts['Order'] ?></h4>
-                                    <p class="mb-0 fs-4">Orders</p>
+                                    <h4 class="mb-1 fw-semibold lh-1"><?php echo $counts['Order'] ?></h4>
+                                    <div class="d-flex flex-row justify-content-center gap-1">
+                                        <span style="color: whitesmoke;"><i class="fa-solid fa-basket-shopping"></i></span>
+                                        <p class="mb-0 fs-4">Orders</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -306,7 +333,7 @@ if ($_SESSION['status'] == 'Worker') {
                     <ul class="nav nav-pills user-profile-tab justify-content-start mt-2 bg-light-info rounded-2" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link position-relative rounded-0 active d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-order-tab" data-bs-toggle="pill" data-bs-target="#pills-order" type="button" role="tab" aria-controls="pills-order" aria-selected="true">
-                                <i class="fa fa-user me-2 fs-6"></i>
+                                <i class="fa-solid fa-basket-shopping me-2 fs-6"></i>
                                 <span class="d-none d-md-block">Order</span>
                             </button>
                         </li>
@@ -315,13 +342,13 @@ if ($_SESSION['status'] == 'Worker') {
                     <ul class="nav nav-pills user-profile-tab justify-content-start mt-2 bg-light-info rounded-2" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link position-relative rounded-0 active d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-order-tab" data-bs-toggle="pill" data-bs-target="#pills-order" type="button" role="tab" aria-controls="pills-order" aria-selected="true">
-                                <i class="fa fa-user me-2 fs-6"></i>
+                                <i class="fa-solid fa-basket-shopping me-2 fs-6"></i>
                                 <span class="d-none d-md-block">Order</span>
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link position-relative rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-review-tab" data-bs-toggle="pill" data-bs-target="#pills-review" type="button" role="tab" aria-controls="pills-review" aria-selected="false" tabindex="-1">
-                                <i class="fa fa-heart me-2 fs-6"></i>
+                            <button class="nav-link position-relative  rounded-0 d-flex align-items-center justify-content-center bg-transparent fs-3 py-6" id="pills-review-tab" data-bs-toggle="pill" data-bs-target="#pills-review" type="button" role="tab" aria-controls="pills-review" aria-selected="false" tabindex="-1">
+                                <i class="fa-solid fa-eye me-2 fs-6"></i>
                                 <span class="d-none d-md-block">Review</span>
                             </button>
                         </li>
@@ -371,7 +398,7 @@ if ($_SESSION['status'] == 'Worker') {
 
                             </div>
                             <div class="row">
-                                <?php while ($row = $result->fetch_assoc()) { ?>
+                                <?php while ($row = $result_Order->fetch_assoc()) { ?>
                                     <div class=" col-md-6 col-xl-4">
                                         <div class="card bg-secondary shadow">
                                             <div class="card-body p-4 d-flex align-items-center gap-3">
@@ -394,10 +421,9 @@ if ($_SESSION['status'] == 'Worker') {
                     <div class="tab-pane fade show active" id="pills-review" role="tabpanel" aria-labelledby="pills-review-tab" tabindex="0">
                         <div class="d-sm-flex align-items-center justify-content-between mt-3 mb-4">
                             <h3 class="mb-3 mb-sm-0 fw-semibold text-white d-flex align-items-center">Review<span class="badge text-bg-secondary fs-2 rounded-4 py-1 px-2 ms-2"><?php echo $counts['Review'] ?></span></h3>
-
                         </div>
                         <div class="row">
-                            <?php while ($row = $result->fetch_assoc()) { ?>
+                            <?php while ($row = $result_Review->fetch_assoc()) { ?>
                                 <div class=" col-md-6 col-xl-4">
                                     <div class="card bg-secondary">
                                         <div class="card-body p-4 d-flex align-items-center gap-3">
