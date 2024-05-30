@@ -13,10 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param('sii', $review, $rating, $order_id);
 
     if ($stmt->execute()) {
-        header('Location: myOrder.php?success=1');
+        header('Location: myOrder.php?success=Successfully provided a review');
         exit();
     } else {
-        header('Location: myOrder.php?error=1');
+        header('Location: myOrder.php?failed=Failed provided a review');
         exit();
     }
 } else {

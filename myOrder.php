@@ -35,8 +35,16 @@ $result = $stmt->get_result();
         <script>
             Swal.fire({
                 title: "Success!",
-                text: "Successfully placed an order!",
+                text: "<?php echo $_GET["success"]?>",
                 icon: "success"
+            });
+        </script>
+    <?php } else if (isset($_GET["failed"])) { ?>
+        <script>
+            Swal.fire({
+                title: "Failed!",
+                text: "<?php echo $_GET["failed"]?>",
+                icon: "error"
             });
         </script>
     <?php } ?>

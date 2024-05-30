@@ -42,6 +42,24 @@ $result = $stmt->get_result();
 </head>
 
 <body>
+    <?php if (isset($_GET["success"])) { ?>
+        <script>
+            Swal.fire({
+                title: "Success!",
+                text: "<?php echo $_GET["success"] ?>",
+                icon: "success"
+            });
+        </script>
+    <?php } else if (isset($_GET["failed"])) { ?>
+        <script>
+            Swal.fire({
+                title: "Failed!",
+                text: "<?php echo $_GET["failed"] ?>",
+                icon: "error"
+            });
+        </script>
+    <?php } ?>
+    
     <div class="container mt-5">
         <h5>Your Jobs</h5>
         <div class="row">
