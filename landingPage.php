@@ -115,7 +115,7 @@ include('layout/header.php')
                 <div>
                     <h3 class="fs-2 text-white">Available to be a Worker</h3>
                     <p class="text-white-50">If you feel good at playing the game, that's our jockey. We have provided a place for you, then you can get the results yourself</p>
-                    <a href="#" class="btn btn-primary">
+                    <a href="https://wa.link/ygcguz" class="btn btn-primary">
                         Join to Workers
                     </a>
                 </div>
