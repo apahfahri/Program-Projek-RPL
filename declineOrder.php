@@ -11,9 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $conn->prepare($query);
         $stmt->bind_param('i', $order_id);
         if ($stmt->execute()) {
-            header('Location: workerPage.php?success');
+            header('Location: workerPage.php?success=successfully rejected the order');
         } else {
-            header('Location: workerPage.php?failed');
+            header('Location: workerPage.php?failed=Failed rejected the order');
         }
         $stmt->close();
     }

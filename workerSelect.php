@@ -41,7 +41,7 @@ include('Server/price.php');
                             <?php } else { ?>
                                 <button type="button" class="btn btn-primary" onclick="showAlert()"> <i class="fa-solid fa-file-contract"></i> Order</button>
                             <?php } ?>
-                            <a href="#" class="btn btn-warning"> <i class="fa-regular fa-address-card"></i> Profile</a>
+                            <a href="profileWorkerPage.php?id=<?php echo $row['Id_Worker'] ?>" class="btn btn-warning"> <i class="fa-regular fa-address-card"></i> Profile</a>
                         </div>
                     </div>
                 </div>

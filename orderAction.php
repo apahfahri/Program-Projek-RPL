@@ -27,7 +27,7 @@ if (isset($_POST['initial']) && isset($_POST['final'])) {
         $stmt->execute();
         $stmt->close();
     
-        header("Location: myOrder.php?success");
+        header("Location: myOrder.php?success=Successfully placed an order!");
     } else {
         echo "Error preparing statement: " . $conn->error;
     }

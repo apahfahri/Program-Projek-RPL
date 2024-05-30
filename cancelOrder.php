@@ -11,9 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $conn->prepare($query);
         $stmt->bind_param('i', $order_id);
         if ($stmt->execute()) {
-            header('Location: myOrder.php?success');
+            header('Location: myOrder.php?success=Successfully cancel an order!');
         } else {
-            header('Location: myOrder.php?failed');
+            header('Location: myOrder.php?failed=Failed cancel an order! Try Again');
         }
         $stmt->close();
     }
