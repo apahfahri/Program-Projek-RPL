@@ -9,43 +9,72 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
     $result = mysqli_query($conn, $checkQuery);
 
     if (mysqli_num_rows($result) > 0) {
-        header("location: registerPage.php?Failed=1");
+        header("location: registerPage.php?failed=This Email and Username is already Exist!");
     } else {
         $query = "INSERT INTO users (Username, Email, Password) VALUES ('$username', '$email', '$password')";
         mysqli_query($conn, $query);
-        header("location: loginPage.php?Success");
+        header("location: registerPage.php?success=Account created Successfully");
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styleLogin.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
-<div class="container mt-4">
-        <div class="container-fluid">
+    <section>
+        <?php if (isset($_GET["success"])) { ?>
+            <script>
+                Swal.fire({
+                    title: "Success!",
+                    text: "Account Created Successfully",
+                    icon: "success"
+                });
+            </script>
+        <?php } ?>
+        <?php if (isset($_GET['failed'])) { ?>
+            <script>
+                Swal.fire({
+                    title: "Failed!",
+                    text: "This Account is already Exist!",
+                    icon: "error"
+                });
+            </script>
+        <?php } ?>
+        <div class="box">
             <form autocomplete="off" id="register-form" method="POST" action="registerPage.php">
-                <div class="mb-3">
+                <h2>Register</h2>
+                <div class="input">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="" required>
+                    <i class="fa-solid fa-user"></i>
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" name="username">
                 </div>
-                <div class="mb-3">
-                    <label for="username" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="email" name="email">
+                <div class="input">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="" required>
+                    <i class="fa-solid fa-envelope"></i>
+                    <label for="email" class="form-label">Email</label>
                 </div>
-                <div class="mb-3">
+                <div class="input">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="" required>
+                    <i class="fa-solid fa-lock"></i>
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password">
-                    <a href="loginPage.php">Already Have Account? Sign In</a>
                 </div>
                 <button type="submit" class="btn btn-primary">Register</button>
+                <div class="register">
+                    <p>Already Have Account? <a href="loginPage.php">Sign In</a></p>
+                </div>
             </form>
         </div>
-    </div>
+    </section>
+
 </body>
+
 </html>
