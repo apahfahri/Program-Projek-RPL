@@ -6,16 +6,17 @@ include('layout/header.php');
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    $query2 =
-        "SELECT 'Customer' AS Status, COUNT(*) AS count FROM users WHERE Status = 'Customer'
+    $query2 = "
+        SELECT 'Customer' AS Status, COUNT(*) AS count FROM users WHERE Status = 'Customer'
         UNION ALL
         SELECT 'Worker', COUNT(*) FROM users WHERE Status = 'Worker'
         UNION ALL
-        SELECT 'Order', COUNT(*) FROM `Order` where Id_Worker = $id
+        SELECT 'Order', COUNT(*) FROM `Order` where Id_Worker = $id and Status = 'Done'
         UNION ALL
         SELECT 'Rating', SUM(Rating) FROM `Order` where Id_Worker = $id
         UNION ALL
-        SELECT 'Review', COUNT(Review) FROM `Order` WHERE Id_Worker = $id";
+        SELECT 'Review', COUNT(Review) FROM `Order` WHERE Id_Worker = $id
+    ";
     $stmt2 = $conn->prepare($query2);
     $stmt2->execute();
     $stmt2->bind_result($status, $count);
@@ -26,11 +27,12 @@ if (isset($_GET['id'])) {
     }
     $stmt2->close();
 
-    $query01 = "SELECT * from users u
-    inner join workers w on u.Id_User = w.Id_User
-    inner join game g on w.Id_Game = g.Id_Game
-    where w.Id_Worker = $id";
-
+    $query01 = "
+        SELECT * from users u
+        inner join workers w on u.Id_User = w.Id_User
+        inner join game g on w.Id_Game = g.Id_Game
+        where w.Id_Worker = $id
+    ";
     $stmt3 = $conn->prepare($query01);
     $stmt3->execute();
     $result2 = $stmt3->get_result();
@@ -38,31 +40,36 @@ if (isset($_GET['id'])) {
     $stmt3->close();
 
     if ($counts['Order'] > 0) {
-        $query02 = "SELECT o.Id_Order,cus.Username as Customer,u.Username as Worker,u.Email,
-        g.Nama_Game,o.Total_Price,r1.rank as Initial_Rank,r2.rank as Final_Rank,o.Message,o.Status,g.Image,
-        cus.Foto as Foto_Customer, o.Review, o.Rating
-        FROM `order` o
-        INNER JOIN users cus ON o.Id_User = cus.Id_User
-        INNER JOIN workers w ON o.Id_Worker = w.Id_Worker
-        INNER JOIN users u ON w.Id_User = u.Id_User
-        INNER JOIN game g ON o.Id_Game = g.Id_Game
-        INNER JOIN rank r1 ON o.initial_rank = r1.Point AND g.Id_Game = r1.Id_Game
-        INNER JOIN rank r2 ON o.final_rank = r2.Point AND g.Id_Game = r2.Id_Game
-        where w.Id_Worker = $id";
+        $query02 = "
+            SELECT o.Id_Order, cus.Username as Customer, u.Username as Worker, u.Email,
+            g.Nama_Game, o.Total_Price, r1.rank as Initial_Rank, r2.rank as Final_Rank, o.Message, o.Status, g.Image,
+            cus.Foto as Foto_Customer, o.Review, o.Rating
+            FROM `order` o
+            INNER JOIN users cus ON o.Id_User = cus.Id_User
+            INNER JOIN workers w ON o.Id_Worker = w.Id_Worker
+            INNER JOIN users u ON w.Id_User = u.Id_User
+            INNER JOIN game g ON o.Id_Game = g.Id_Game
+            INNER JOIN rank r1 ON o.initial_rank = r1.Point AND g.Id_Game = r1.Id_Game
+            INNER JOIN rank r2 ON o.final_rank = r2.Point AND g.Id_Game = r2.Id_Game
+            where w.Id_Worker = $id and o.status = 'Done'
+        ";
 
         $stmt = $conn->prepare($query02);
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();
-
-
-
-        $rating = $counts['Rating'] / $counts['Review'];
+        
+        try {
+            $rating = $counts['Review'] > 0 ? $counts['Rating'] / $counts['Review'] : 0;
+        } catch (DivisionByZeroError $e) {
+            $rating = 0; // Handle division by zero
+        }
     } else {
         $rating = 0;
     }
 } else {
     header('location: workerSelect.php?error=Something error');
+    exit();
 }
 ?>
 

@@ -309,7 +309,7 @@ $stmt->close();
                                                     <svg class="bi text-danger" width="32" height="32" fill="blue" style="width:10px">
                                                         <use xlink:href="assets/static/images/bootstrap-icons.svg#circle-fill" />
                                                     </svg>
-                                                    <h5 class="mb-3 ms-3">PUBG Mobile</h5>
+                                                    <h5 class="mb-2 ms-3">PUBG Mobile</h5>
                                                 </div>
                                             </div>
                                             <div class="col-5">

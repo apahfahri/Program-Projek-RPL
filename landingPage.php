@@ -96,8 +96,8 @@ include('layout/header.php')
                 <div>
                     <h3 class="fs-2 text-white">Can to Order Service</h3>
                     <p class="text-white-50">If you are tired of losing all the time playing games, you should order our worker to increase your rank. so you just drink coffee and wait effortless</p>
-                    <a href="#" class="btn btn-primary">
-                        Order Worker
+                    <a href="index.php" class="btn btn-primary">
+                        Order
                     </a>
                 </div>
             </div>
@@ -107,7 +107,7 @@ include('layout/header.php')
                     <h3 class="fs-2 text-white">View Worker's Profile</h3>
                     <p class="text-white-50">Here you can find the specifications of our workers. <br>You can see the worker's profile when you want to order a worker for you</p>
                     <a href="#" class="btn btn-primary">
-                        Order Worker
+                        Worker
                     </a>
                 </div>
             </div>

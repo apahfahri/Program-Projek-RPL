@@ -100,24 +100,6 @@ include('Server/price.php');
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Select Rank Game Rating -->
-                        <div class="row rank-rating">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="initialRating" class="col-form-label">Initial Rating:</label>
-                                    <input type="range" class="form-range" min="0" max="20000" step="1000" id="initialRange">
-                                    <span id="initialRangeValue">0</span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="finalRating" class="col-form-label">Final Rating:</label>
-                                    <input type="range" class="form-range" min="0" max="20000" step="1000" id="finalRange">
-                                    <span id="finalRangeValue">0</span>
-                                </div>
-                            </div>
-                        </div>
                         <div class="mb-3">
                             <label for="priceInput" class="col-form-label">Price:</label>
                             <input type="text" class="form-control" id="priceInput" name="price" disabled>
@@ -158,13 +140,6 @@ include('Server/price.php');
         $('#Id_Worker').val(idWorker);
         $('#Id_Game').val(idGame);
         $('#Id_User').val(idUser);
-        if (idGame == 3 || idGame == 4) {
-            $('.rank-tier').hide();
-            $('.rank-rating').show();
-        } else {
-            $('.rank-tier').show();
-            $('.rank-rating').hide();
-        }
         $('#orderModal').modal('show');
     });
 
@@ -210,6 +185,16 @@ include('Server/price.php');
         const finalRank = parseInt(finalRankSelect.value);
 
         if (!initialRank || !finalRank) {
+            document.getElementById('priceInput').value = '';
+            return;
+        }
+
+        if (finalRank <= initialRank) {
+            Swal.fire({
+                title: "Error!",
+                text: "Final rank must be higher than initial rank",
+                icon: "error"
+            });
             document.getElementById('priceInput').value = '';
             return;
         }

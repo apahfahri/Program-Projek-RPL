@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Website Saya</title>
+  <title>Smurfer</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -11,7 +11,7 @@
 <body>
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark nav-underline shadow mb-3">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/landingPage.php">
+      <a class="navbar-brand" href="landingPage.php">
         <img src="./asset/smurfer/logo.png" alt="Logo" width="125" class="d-inline-block align-text-top ml-4">
       </a>
       <div class="collapse navbar-collapse" id="collapsibleNavbar">
@@ -19,6 +19,12 @@
           <li class="nav-item">
             <a class="nav-link" href="index.php" style="font-size: large;">Game</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="allWorker.php" style="font-size: large;">Worker</a>
+          </li>
+          <?php if (isset($_SESSION['logged_in']) && $_SESSION['status'] == 'Worker') { ?>
+            <a class="nav-link" href="workerPage.php" style="font-size: large;">My Jobs</a>
+          <?php } ?>
         </ul>
         <ul class="navbar-nav justify-content-end">
           <li class="nav-item mr-3">
@@ -47,7 +53,6 @@
                     <hr class="dropdown-divider">
                   </li>
                   <li><a class="dropdown-item text-light" href="myOrder.php">My Order</a></li>
-                  <li><a class="dropdown-item text-light" href="#">Settings</a></li>
                   <li><a class="dropdown-item text-light" href="profilePage.php">Profile</a></li>
                   <li>
                     <hr class="dropdown-divider">
